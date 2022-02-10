@@ -1,0 +1,19 @@
+{
+  "name": "xhttp-demo",
+  "version": "1.0.0",
+  "description": "XHttp demo",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "js-xhttp": "^1.0.0"
+  },
+  "devDependencies": {
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^10.1.1"
+  },
+  "author": "hxb",
+  "license": "ISC"
+}
