@@ -1,4 +1,4 @@
-[README in English](https://github.com/pandaoh/web_ajax_xhttp/blob/master/README.en.md)
+[README in English](https://github.com/pandaoh/js-xhttp/blob/master/README.en.md)
 
 # XHttp
 
@@ -153,10 +153,10 @@ Axios.get('/axios')
 
 ## 全部 API 列表
 
-[API Docs](https://github.com/pandaoh/web_ajax_xhttp/blob/master/docs/README.md)
+[API Docs](https://github.com/pandaoh/js-xhttp/blob/master/docs/README.md)
 
 ## 其他
 
 * 此工具类基于 [axios](https://github.com/axios/axios) 二次封装实现
-* 问题反馈可以建 [Issue](https://github.com/pandaoh/web_ajax_xhttp/issues)，或者提交 [Pull Request](https://github.com/pandaoh/web_ajax_xhttp/pulls)，邮箱：[hxbpandaoh@163.com](mailto:hxbpandaoh@163.com)
+* 问题反馈可以建 [Issue](https://github.com/pandaoh/js-xhttp/issues)，或者提交 [Pull Request](https://github.com/pandaoh/js-xhttp/pulls)，邮箱：[hxbpandaoh@163.com](mailto:hxbpandaoh@163.com)
 * 更多功能完善中...

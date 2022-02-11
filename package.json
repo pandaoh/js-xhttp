@@ -21,16 +21,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pandaoh/web_ajax_xhttp.git"
+    "url": "git+https://github.com/pandaoh/js-xhttp.git"
   },
   "author": "hxb",
   "publisher": "1005760694@qq.com",
   "blog": "http://a.biugle.cn",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pandaoh/web_ajax_xhttp/issues"
+    "url": "https://github.com/pandaoh/js-xhttp/issues"
   },
-  "homepage": "https://github.com/pandaoh/web_ajax_xhttp#readme",
+  "homepage": "https://github.com/pandaoh/js-xhttp#readme",
   "keywords": [
     "xhttp",
     "js-xhttp",

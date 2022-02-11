@@ -1,4 +1,4 @@
-[中文 README](https://github.com/pandaoh/web_ajax_xhttp)
+[中文 README](https://github.com/pandaoh/js-xhttp)
 
 # XHttp
 
@@ -153,10 +153,10 @@ Axios.get('/axios')
 
 ## API List
 
-[API Docs](https://github.com/pandaoh/web_ajax_xhttp/blob/master/docs/README.md)
+[API Docs](https://github.com/pandaoh/js-xhttp/blob/master/docs/README.md)
 
 ## Others
 
 * XHttp is based on [axios](https://github.com/axios/axios) secondary encapsulation implementation.
-* For problem feedback, you can create [Issue](https://github.com/pandaoh/web_ajax_xhttp/issues) or submit [Pull Request](https://github.com/pandaoh/web_ajax_xhttp/pulls), email: [hxbpandaoh@163.com](mailto:hxbpandaoh@163.com)).
+* For problem feedback, you can create [Issue](https://github.com/pandaoh/js-xhttp/issues) or submit [Pull Request](https://github.com/pandaoh/js-xhttp/pulls), email: [hxbpandaoh@163.com](mailto:hxbpandaoh@163.com)).
 * More functions are being improved...
