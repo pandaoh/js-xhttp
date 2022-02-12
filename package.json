@@ -15,10 +15,11 @@
     "tsc": "tsc",
     "build": "rollup -c",
     "test": "test",
+    "mock666": "npm install && node ./mocker/index.js",
     "clear": "rimraf ./node_modules && npm run remove",
     "remove": "rimraf ./dist && rimraf ./es && rimraf ./lib",
     "doc": "typedoc --options ./typedoc.json",
-    "publish": "npm install && npm run build && npm run doc && node ./publish.js"
+    "pub": "npm install && npm run build && npm run doc && node ./auto-pub.js"
   },
   "files": [
     "/lib",
@@ -32,7 +33,7 @@
     "url": "git+https://github.com/pandaoh/js-xhttp.git"
   },
   "author": "hxb",
-  "publisher": "1005760694@qq.com",
+  "publisher": "hxbpandaoh@163.com",
   "blog": "http://a.biugle.cn",
   "license": "ISC",
   "bugs": {
