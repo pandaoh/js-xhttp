@@ -1,5 +1,5 @@
-const { XHttp, HttpMethod, XHttpUtils, Axios } = require('js-xhttp');
-// import { XHttp, HttpMethod, XHttpUtils, Axios as axios } from 'js-xhttp'; // 使用 import 导入 package.json[type] = "modules"
+const { XHttp, XHttpMethod, XHttpUtils, Axios } = require('js-xhttp');
+// import { XHttp, XHttpMethod, XHttpUtils, Axios as axios } from 'js-xhttp'; // 使用 import 导入 package.json[type] = "modules"
 
 let $http = new XHttp(
   {
