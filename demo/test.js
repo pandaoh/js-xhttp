@@ -1,5 +1,6 @@
-const { XHttp, XHttpMethod, XHttpUtils, Axios } = require('js-xhttp');
-// import { XHttp, XHttpMethod, XHttpUtils, Axios as axios } from 'js-xhttp'; // 使用 import 导入 package.json[type] = "modules"
+const { XHttp, XHttpMethod, XHttpUtils, Axios } = require('../dist/xhttp');
+// const { XHttp, XHttpMethod, XHttpUtils, Axios } = require('js-xhttp');
+// import { XHttp, XHttpMethod, XHttpUtils, Axios } from 'js-xhttp'; // 使用 import 导入 package.json[type] = "modules"
 
 let $http = new XHttp(
   {
@@ -10,10 +11,10 @@ let $http = new XHttp(
       delay: 1000
     },
     requestHandler: (config) => {
-      console.log('requestHandler', config);
+      // console.log('requestHandler', config);
     },
     responseHandler: (response) => {
-      console.log('responseHandler', response.status);
+      // console.log('responseHandler', response.status);
     },
     errorHandler: (error) => {
       // console.log('errorHandler', error);
@@ -55,10 +56,10 @@ $http.request(XHttpMethod.GET, '/tests', { start: 0, count: 20 }, {}, true);
 $http
   .post('/login', { username: 'test', password: '123456' })
   .then((res) => {
-    console.log('res', res);
+    // console.log('res', res);
   })
   .catch((err) => {
-    console.log('err', err);
+    // console.log('err', err);
   })
   .finally(() => {
     console.log('finally TEST');
@@ -71,16 +72,16 @@ $http
 
 Axios.get('/axios')
   .then(function (response) {
-    console.log(response.data);
-    console.log(response.status);
-    console.log(response.statusText);
-    console.log(response.headers);
-    console.log(response.config);
+    // console.log(response.data);
+    // console.log(response.status);
+    // console.log(response.statusText);
+    // console.log(response.headers);
+    // console.log(response.config);
   })
   .catch((e) => {});
 
-// console.log(XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] })); // start=0&count=20&obj={"a":1}&arr=1&arr=2&arr=3
-// console.log(XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] }, str: '1', true)); // start=0&count=20&obj={"a":1}&arr=1,2,3&str=1
+console.log(XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] })); // start=0&count=20&obj={"a":1}&arr=1&arr=2&arr=3
+console.log(XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3], str: '1' }, true)); // start=0&count=20&obj={"a":1}&arr=1,2,3&str=1
 // console.log(XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3')); // { '/': 'start=0&count=20&x=1&x=2&x=3', count: '20',x: [ '1', '2', '3' ] }
 // console.log(XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3', 'x')); // [ '1', '2', '3' ]
 // console.log(XHttpUtils.data2Obj([{ a: 1, b: 2 }, { a: 3 }, { b: 1 }, { c: 1 }], 'a')); // { '1': { a: 1, b: 2 }, '3': { a: 3 }, undefined: { c: 1 } }
@@ -92,3 +93,8 @@ Axios.get('/axios')
 // console.log(XHttpUtils.get1Var({ a: 2, b: 1 })); // 2
 // console.log(XHttpUtils.mergeObj({ name: 1, oldValue: 2 }, { name: 3, value: 4 }, [])); // { name: 1, oldValue: 2, value: 4 }
 // console.log(XHttpUtils.mergeObj({ name: 1, oldValue: 2 }, { name: 3, value: 4 }, ['name'], true)); // { name: 3, value: 4 }
+// console.log(
+//   XHttpUtils.formatDate(new Date(), 'yyyy-mm-dd hh:ii:ss S Q W', ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'])
+// ); // 2022-02-14 18:12:12 395 1 Mon
+console.log(XHttpUtils.getRandStr()); // '76155086'
+console.log(XHttpUtils.getUId(0), XHttpUtils.getUId()); // 15901241814022022 kxyds0p0vwg

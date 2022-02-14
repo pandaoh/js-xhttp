@@ -115,7 +115,7 @@ export declare class XHttpUtils {
     static getRandNum(min?: number, max?: number): number;
     static getRandColor(): string;
     static getRandStr(pow?: number): string;
-    static getUId(radix?: number | undefined, pow?: number): string;
+    static getUId(pow?: number, radix?: number | undefined): string;
     static str2html(value: string): string;
     static html2str(value: string): string | null;
     static unicode2str(value: string): string;

@@ -111,6 +111,8 @@ $http.cancelWhiteListRequest('all white list');
 ### XHttpUtils methods
 
 ```javascript
+XHttpUtils.qsStringify({ start: 0, count: 20, arr: [1, 2, 3] }); // start=0&count=20&arr=1&arr=2&arr=3
+XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3], str: '1' }, true); // start=0&count=20&obj={"a":1}&arr=1,2,3&str=1
 XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3', 'x'); // [1, 2, 3]
 XHttpUtils.empty(''); // 'null','undefined' => true
 XHttpUtils.typeof({});

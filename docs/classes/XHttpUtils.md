@@ -1,4 +1,4 @@
-[js-xhttp - v1.1.4](../README.md) / XHttpUtils
+[js-xhttp - v1.1.5](../README.md) / XHttpUtils
 
 # Class: XHttpUtils
 
@@ -329,7 +329,7 @@ ___
 
 ### getUId
 
-▸ `Static` **getUId**(`radix?`, `pow?`): `string`
+▸ `Static` **getUId**(`pow?`, `radix?`): `string`
 
 获取简单的唯一 ID
 
@@ -337,8 +337,8 @@ ___
 
 | Name | Type | Default value |
 | :------ | :------ | :------ |
+| `pow` | `number` | `10000` |
 | `radix` | `undefined` \| `number` | `36` |
-| `pow` | `number` | `100000000` |
 
 #### Returns
 
