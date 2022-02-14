@@ -59,7 +59,7 @@ const $http = new XHttp(
       console.log('errorHandler', error); // Intercept processing after error
     },
     setRequestHeaders: (config) => {
-      return config; // Returns the configuration object, and the request header can be modified. For example, an object is returned, otherwise an error will be thrown.
+      return config; // Returns the configuration object, and the request header can be modified. must return an object, otherwise an error will be thrown.
     },
     requestFinally: () => {
       console.log('requestFinally Handler'); // The callback when the request is completed, regardless of the result.
@@ -112,7 +112,7 @@ $http.cancelWhiteListRequest('all white list');
 
 ```javascript
 XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3', 'x'); // [1, 2, 3]
-XHttpUtils.empty('');
+XHttpUtils.empty(''); // 'null','undefined' => true
 XHttpUtils.typeof({});
 XHttpUtils.deepClone({});
 XHttpUtils.formatDate(new Date(), 'yyyy-mm-dd hh:ii:ss'); // Referenc php

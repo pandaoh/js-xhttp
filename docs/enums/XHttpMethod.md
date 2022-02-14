@@ -1,4 +1,4 @@
-[js-xhttp - v1.1.1](../README.md) / XHttpMethod
+[js-xhttp - v1.1.2](../README.md) / XHttpMethod
 
 # Enumeration: XHttpMethod
 

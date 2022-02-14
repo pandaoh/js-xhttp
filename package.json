@@ -1,6 +1,6 @@
 {
   "name": "js-xhttp",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "An HTTP tool is based on Axios that can make ajax more convenient and universal, easier to manage, and more efficient and unified.",
   "iife": "xhttp.js",
   "main": "lib/index.js",
@@ -19,7 +19,8 @@
     "clear": "rimraf ./node_modules && npm run remove",
     "remove": "rimraf ./dist && rimraf ./es && rimraf ./lib",
     "doc": "typedoc --options ./typedoc.json",
-    "pub": "npm install && npm run build && npm run doc && node ./auto-pub.js"
+    "pub": "npm install && npm run build && npm run doc && node ./auto-pub.js",
+    "pub:local": "npm install && npm run build && npm run doc && node ./auto-pub.js true"
   },
   "files": [
     "/lib",

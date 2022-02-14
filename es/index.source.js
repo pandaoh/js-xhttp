@@ -335,7 +335,7 @@ var XHttp = (function () {
             return __generator(this, function (_a) {
                 formData = new FormData();
                 Object.keys(data).forEach(function (key) {
-                    formData.append(key, Array.isArray(data[key]) ? data[key].join(',') : data[key]);
+                    formData.append(key, data[key]);
                 });
                 return [2, this.request(XHttpMethod.POST, url, __assign(__assign({}, config), { data: formData, headers: {
                             'Content-Type': 'multipart/form-data;charset=UTF-8;',
@@ -471,12 +471,31 @@ var XHttpUtils = (function () {
         }
         return false;
     };
-    XHttpUtils.qsStringify = function (obj) {
+    XHttpUtils.qsStringify = function (obj, arr2str) {
+        var _this = this;
+        if (arr2str === void 0) { arr2str = false; }
         var search = [];
-        for (var key in obj) {
-            var value = Array.isArray(obj[key]) ? obj[key].join(',') : JSON.stringify(obj[key]);
+        var _loop_1 = function (key) {
+            var val = obj[key];
+            if (Array.isArray(val)) {
+                val = val.filter(Boolean).map(function (i) { return _this.typeof(i) === 'string' ? i : JSON.stringify(i); }).join(',');
+                if (arr2str) {
+                    search.push("".concat(key, "=").concat(val.join(',')));
+                }
+                else {
+                    val.forEach(function (v) {
+                        search.push("".concat(key, "=").concat(v));
+                    });
+                }
+                return "continue";
+            }
+            var value = this_1.typeof(val) === 'string' ? val : JSON.stringify(val);
             var item = "".concat(key, "=").concat(value);
             search.push(item);
+        };
+        var this_1 = this;
+        for (var key in obj) {
+            _loop_1(key);
         }
         return search.join('&');
     };
@@ -515,7 +534,7 @@ var XHttpUtils = (function () {
             })
             : defaultResult;
     };
-    XHttpUtils.getFirstVar = function (data) {
+    XHttpUtils.get1Var = function (data) {
         if (this.typeof(data) !== 'object' && !Array.isArray(data)) {
             return data;
         }
@@ -527,7 +546,7 @@ var XHttpUtils = (function () {
     XHttpUtils.sleep = function (milliseconds) {
         return new Promise(function (resolve) { return setTimeout(resolve, milliseconds); });
     };
-    XHttpUtils.uniqueArray = function (arr) {
+    XHttpUtils.arraySet = function (arr) {
         if (!Array.isArray(arr)) {
             return arr;
         }
@@ -546,8 +565,8 @@ var XHttpUtils = (function () {
         }
         return result;
     };
-    XHttpUtils.mergeObj = function (oldObj, newObj, keys, hasOld) {
-        if (hasOld === void 0) { hasOld = false; }
+    XHttpUtils.mergeObj = function (oldObj, newObj, keys, noOld) {
+        if (noOld === void 0) { noOld = false; }
         for (var newKey in newObj) {
             if (this.typeof(newObj[newKey]) === 'object' && this.typeof((oldObj[newKey]) === 'object')) {
                 oldObj[newKey] = this.mergeObj(oldObj[newKey], newObj[newKey], keys);
@@ -557,7 +576,7 @@ var XHttpUtils = (function () {
                 oldObj[newKey] = newObj[newKey];
             }
         }
-        if (hasOld) {
+        if (noOld) {
             for (var oldKey in oldObj) {
                 if (newObj[oldKey] === undefined) {
                     delete oldObj[oldKey];
@@ -616,8 +635,8 @@ var XHttpUtils = (function () {
     };
     XHttpUtils.formatFormData = function (obj) {
         var formData = new FormData();
-        for (var item in obj) {
-            formData.append(item, Array.isArray(obj[item]) ? obj[item].join(',') : obj[item]);
+        for (var key in obj) {
+            formData.append(key, obj[key]);
         }
         return formData;
     };
@@ -658,7 +677,7 @@ var XHttpUtils = (function () {
     XHttpUtils.base64Decode = function (str) {
         return Buffer.from(str, 'base64').toString('utf8');
     };
-    XHttpUtils.objByData = function (arr, key, vKey) {
+    XHttpUtils.data2Obj = function (arr, key, vKey) {
         var obj = {};
         if (!Array.isArray(arr)) {
             return obj;
@@ -668,7 +687,7 @@ var XHttpUtils = (function () {
         });
         return obj;
     };
-    XHttpUtils.arrByData = function (obj, key) {
+    XHttpUtils.data2Arr = function (obj, key) {
         var _a;
         var arr = [];
         if (obj.length === 0) {

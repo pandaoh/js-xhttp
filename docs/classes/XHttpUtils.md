@@ -1,4 +1,4 @@
-[js-xhttp - v1.1.1](../README.md) / XHttpUtils
+[js-xhttp - v1.1.2](../README.md) / XHttpUtils
 
 # Class: XHttpUtils
 
@@ -10,12 +10,13 @@
 
 ### Properties
 
-- [arrByData](XHttpUtils.md#arrbydata)
+- [data2Arr](XHttpUtils.md#data2arr)
+- [data2Obj](XHttpUtils.md#data2obj)
 - [instance](XHttpUtils.md#instance)
-- [objByData](XHttpUtils.md#objbydata)
 
 ### Methods
 
+- [arraySet](XHttpUtils.md#arrayset)
 - [base64Decode](XHttpUtils.md#base64decode)
 - [base64Encode](XHttpUtils.md#base64encode)
 - [deepClone](XHttpUtils.md#deepclone)
@@ -23,7 +24,7 @@
 - [formatBytes](XHttpUtils.md#formatbytes)
 - [formatDate](XHttpUtils.md#formatdate)
 - [formatFormData](XHttpUtils.md#formatformdata)
-- [getFirstVar](XHttpUtils.md#getfirstvar)
+- [get1Var](XHttpUtils.md#get1var)
 - [getInstance](XHttpUtils.md#getinstance)
 - [getRandColor](XHttpUtils.md#getrandcolor)
 - [getRandNum](XHttpUtils.md#getrandnum)
@@ -38,7 +39,6 @@
 - [trim](XHttpUtils.md#trim)
 - [typeof](XHttpUtils.md#typeof)
 - [unicode2str](XHttpUtils.md#unicode2str)
-- [uniqueArray](XHttpUtils.md#uniquearray)
 
 ## Constructors
 
@@ -48,9 +48,9 @@
 
 ## Properties
 
-### arrByData
+### data2Arr
 
-▪ `Static` **arrByData**: (`obj`: { [key: string]: `any`;  }[], `key`: `string`) => `any`[]
+▪ `Static` **data2Arr**: (`obj`: { [key: string]: `any`;  }[], `key`: `string`) => `any`[]
 
 #### Type declaration
 
@@ -71,15 +71,9 @@
 
 ___
 
-### instance
+### data2Obj
 
-▪ `Static` `Private` **instance**: [`XHttpUtils`](XHttpUtils.md)
-
-___
-
-### objByData
-
-▪ `Static` **objByData**: (`arr`: { [key: string]: `any`;  }[], `key`: `string`, `vKey?`: `string`) => { [key: string]: `any`;  }
+▪ `Static` **data2Obj**: (`arr`: { [key: string]: `any`;  }[], `key`: `string`, `vKey?`: `string`) => { [key: string]: `any`;  }
 
 #### Type declaration
 
@@ -99,7 +93,31 @@ ___
 
 `Object`
 
+___
+
+### instance
+
+▪ `Static` `Private` **instance**: [`XHttpUtils`](XHttpUtils.md)
+
 ## Methods
+
+### arraySet
+
+▸ `Static` **arraySet**(`arr`): `undefined` \| ``null`` \| `string` \| `Iterable`<`any`\>
+
+数组去重
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `arr` | `undefined` \| ``null`` \| `string` \| `Iterable`<`any`\> |
+
+#### Returns
+
+`undefined` \| ``null`` \| `string` \| `Iterable`<`any`\>
+
+___
 
 ### base64Decode
 
@@ -227,9 +245,9 @@ ___
 
 ___
 
-### getFirstVar
+### get1Var
 
-▸ `Static` **getFirstVar**(`data`): `any`
+▸ `Static` **get1Var**(`data`): `any`
 
 获取对象/数组第一个值
 
@@ -327,7 +345,7 @@ ___
 
 ### mergeObj
 
-▸ `Static` **mergeObj**(`oldObj`, `newObj`, `keys?`, `hasOld?`): `Object`
+▸ `Static` **mergeObj**(`oldObj`, `newObj`, `keys?`, `noOld?`): `Object`
 
 合并对象
 
@@ -338,7 +356,7 @@ ___
 | `oldObj` | `Object` | `undefined` |
 | `newObj` | `Object` | `undefined` |
 | `keys?` | `string` \| `string`[] | `undefined` |
-| `hasOld` | `boolean` | `false` |
+| `noOld` | `boolean` | `false` |
 
 #### Returns
 
@@ -367,15 +385,16 @@ ___
 
 ### qsStringify
 
-▸ `Static` **qsStringify**(`obj`): `string`
+▸ `Static` **qsStringify**(`obj`, `arr2str?`): `string`
 
 对象转 querystring
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `obj` | `any` |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `obj` | `any` | `undefined` |
+| `arr2str` | `boolean` | `false` |
 
 #### Returns
 
@@ -489,21 +508,3 @@ unicode转字符
 #### Returns
 
 `string`
-
-___
-
-### uniqueArray
-
-▸ `Static` **uniqueArray**(`arr`): `undefined` \| ``null`` \| `string` \| `Iterable`<`any`\>
-
-数组去重
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `arr` | `undefined` \| ``null`` \| `string` \| `Iterable`<`any`\> |
-
-#### Returns
-
-`undefined` \| ``null`` \| `string` \| `Iterable`<`any`\>

@@ -90,26 +90,26 @@ export declare class XHttpUtils {
     static getInstance(): XHttpUtils;
     static typeof(obj: any): string;
     static empty(obj: any): boolean;
-    static qsStringify(obj: any): string;
+    static qsStringify(obj: any, arr2str?: boolean): string;
     static qsParse(url?: string, key?: string): any;
-    static objByData: (arr: {
+    static data2Obj: (arr: {
         [key: string]: any;
     }[], key: string, vKey?: string | undefined) => {
         [key: string]: any;
     };
-    static arrByData: (obj: {
+    static data2Arr: (obj: {
         [key: string]: any;
     }[], key: string) => any[];
     static getV(defaultResult: any, ...args: any): any;
-    static getFirstVar(data: any): any;
+    static get1Var(data: any): any;
     static sleep(milliseconds: number | undefined): Promise<void>;
-    static uniqueArray(arr: string | Iterable<any> | null | undefined): string | Iterable<any> | null | undefined;
+    static arraySet(arr: string | Iterable<any> | null | undefined): string | Iterable<any> | null | undefined;
     static deepClone(data: any): any;
     static mergeObj(oldObj: {
         [key: string]: any;
     }, newObj: {
         [key: string]: any;
-    }, keys?: string | string[], hasOld?: boolean): {
+    }, keys?: string | string[], noOld?: boolean): {
         [key: string]: any;
     };
     static getRandNum(min?: number, max?: number): number;

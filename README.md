@@ -59,7 +59,7 @@ const $http = new XHttp(
       console.log('errorHandler', error); // 错误处理 可自行打印日志log
     },
     setRequestHeaders: (config) => {
-      return config; // 返回配置对象，可修改请求头。比如返回一个对象，否则会抛出错误。
+      return config; // 返回配置对象，可修改请求头。必须返回一个对象，否则会抛出错误。
     },
     requestFinally: () => {
       console.log('requestFinally Handler'); // 请求完成时的回调，无论结果如何。
@@ -112,7 +112,7 @@ $http.cancelWhiteListRequest('all white list');
 
 ```javascript
 XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3', 'x'); // [1, 2, 3]
-XHttpUtils.empty('');
+XHttpUtils.empty(''); // 'null','undefined' 字符串也会被判空
 XHttpUtils.typeof({});
 XHttpUtils.deepClone({});
 XHttpUtils.formatDate(new Date(), 'yyyy-mm-dd hh:ii:ss'); // 参考 php
