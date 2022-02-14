@@ -601,6 +601,15 @@
         XHttpUtils.getRandColor = function () {
             return '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
         };
+        XHttpUtils.getRandStr = function (pow) {
+            if (pow === void 0) { pow = 100000000; }
+            return pow === 0 ? '' : (Math.random() * pow).toFixed();
+        };
+        XHttpUtils.getUId = function (radix, pow) {
+            if (radix === void 0) { radix = 36; }
+            if (pow === void 0) { pow = 100000000; }
+            return Number("".concat(this.getRandStr(pow)).concat(this.formatDate(new Date(), 'Sssiihhddmmyyyy'))).toString(radix);
+        };
         XHttpUtils.str2html = function (value) {
             var div = document.createElement('div');
             div.textContent = value;
@@ -658,23 +667,25 @@
             var unit = (_a = units === null || units === void 0 ? void 0 : units[pow]) !== null && _a !== void 0 ? _a : units[0];
             return bytes.toFixed(precision) + ' ' + unit;
         };
-        XHttpUtils.formatDate = function (date, fmt) {
+        XHttpUtils.formatDate = function (date, fmt, weeks) {
             if (fmt === void 0) { fmt = "yyyy-mm-dd hh:ii:ss"; }
+            weeks = weeks !== null && weeks !== void 0 ? weeks : [7, 1, 2, 3, 4, 5, 6];
             var o = {
                 'm+': date.getMonth() + 1,
                 'd+': date.getDate(),
                 'h+': date.getHours(),
                 'i+': date.getMinutes(),
                 's+': date.getSeconds(),
-                'Q+': Math.floor((date.getMonth() + 3) / 3),
-                'S': date.getMilliseconds()
+                'Q': Math.floor((date.getMonth() + 3) / 3),
+                'S': "".concat(date.getMilliseconds()).padStart(3, '0'),
+                'W': weeks[date.getDay()]
             };
             if (/(y+)/.test(fmt)) {
-                fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+                fmt = fmt.replace(RegExp.$1, "".concat(date.getFullYear()).substr(4 - RegExp.$1.length));
             }
             for (var k in o) {
                 if (new RegExp('(' + k + ')').test(fmt)) {
-                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? o[k] : "00".concat(o[k]).substr(("".concat(o[k]).length)));
                 }
             }
             return fmt;

@@ -114,6 +114,8 @@ export declare class XHttpUtils {
     };
     static getRandNum(min?: number, max?: number): number;
     static getRandColor(): string;
+    static getRandStr(pow?: number): string;
+    static getUId(radix?: number | undefined, pow?: number): string;
     static str2html(value: string): string;
     static html2str(value: string): string | null;
     static unicode2str(value: string): string;
@@ -121,7 +123,7 @@ export declare class XHttpUtils {
     static trim(str: string, type?: number | string): string;
     static formatFormData(obj: any): FormData;
     static formatBytes(bytes: number, precision?: number): string;
-    static formatDate(date: Date, fmt?: string): string;
+    static formatDate(date: Date, fmt?: string, weeks?: any[]): string;
     static base64Encode(str: string): string;
     static base64Decode(str: string): string;
 }

@@ -28,6 +28,8 @@
 - [getInstance](XHttpUtils.md#getinstance)
 - [getRandColor](XHttpUtils.md#getrandcolor)
 - [getRandNum](XHttpUtils.md#getrandnum)
+- [getRandStr](XHttpUtils.md#getrandstr)
+- [getUId](XHttpUtils.md#getuid)
 - [getV](XHttpUtils.md#getv)
 - [html2str](XHttpUtils.md#html2str)
 - [mergeObj](XHttpUtils.md#mergeobj)
@@ -210,7 +212,7 @@ ___
 
 ### formatDate
 
-▸ `Static` **formatDate**(`date`, `fmt?`): `string`
+▸ `Static` **formatDate**(`date`, `fmt?`, `weeks?`): `string`
 
 时间格式化
 
@@ -220,6 +222,7 @@ ___
 | :------ | :------ | :------ |
 | `date` | `Date` | `undefined` |
 | `fmt` | `string` | `"yyyy-mm-dd hh:ii:ss"` |
+| `weeks?` | `any`[] | `undefined` |
 
 #### Returns
 
@@ -303,6 +306,43 @@ ___
 #### Returns
 
 `number`
+
+___
+
+### getRandStr
+
+▸ `Static` **getRandStr**(`pow?`): `string`
+
+获取随机数字字符串
+
+#### Parameters
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `pow` | `number` | `100000000` |
+
+#### Returns
+
+`string`
+
+___
+
+### getUId
+
+▸ `Static` **getUId**(`radix?`, `pow?`): `string`
+
+获取简单的唯一 ID
+
+#### Parameters
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `radix` | `undefined` \| `number` | `36` |
+| `pow` | `number` | `100000000` |
+
+#### Returns
+
+`string`
 
 ___
 

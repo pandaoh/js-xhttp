@@ -62,11 +62,11 @@ const $http = new XHttp(
       return config; // Returns the configuration object, and the request header can be modified. must return an Headers object, otherwise an error will be thrown.
     },
     requestFinally: () => {
-      console.log('requestFinally Handler'); // The callback when the request is completed, regardless of the result.
+      console.log('requestFinally Hooks'); // The callback when the request is completed, regardless of the result.
     }
   },
   { // Compatible with axios configuration
-    baseURL: 'http://localhost:3000'
+    baseURL: 'http://localhost:666'
   }
 );
 
@@ -101,7 +101,7 @@ $http.request(XHttpMethod.GET, '/tests', { start: 0, count: 20 }, {}, true);
 
 ```javascript
 $http.setAuthToken('test token');
-$http.setBaseURL('http://localhost:3000');
+$http.setBaseURL('http://localhost:666');
 console.log($http.getInstance().defaults.headers);
 $http.cancelRequest('all');
 $http.cancelWhiteListRequest('all white list');
@@ -115,7 +115,7 @@ XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3', 'x'); // [1, 2, 3]
 XHttpUtils.empty(''); // 'null','undefined' => true
 XHttpUtils.typeof({});
 XHttpUtils.deepClone({});
-XHttpUtils.formatDate(new Date(), 'yyyy-mm-dd hh:ii:ss'); // Referenc php
+XHttpUtils.formatDate(new Date(), 'yyyy-mm-dd hh:ii:ss S Q W', ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']); // Refer php date
 /* ...and so more... */
 ```
 

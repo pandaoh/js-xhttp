@@ -62,11 +62,11 @@ const $http = new XHttp(
       return config; // 返回配置对象，可修改请求头。必须返回一个请求头对象，否则会抛出错误。
     },
     requestFinally: () => {
-      console.log('requestFinally Handler'); // 请求完成时的回调，无论结果如何。
+      console.log('requestFinally Hooks'); // 请求完成时的回调，无论结果如何。
     }
   },
   { // 兼容 axios 配置
-    baseURL: 'http://localhost:3000'
+    baseURL: 'http://localhost:666'
   }
 );
 
@@ -101,11 +101,11 @@ $http.request(XHttpMethod.GET, '/tests', { start: 0, count: 20 }, {}, true);
 
 ```javascript
 $http.setAuthToken('test token');
-$http.setBaseURL('http://localhost:3000');
+$http.setBaseURL('http://localhost:666');
 console.log($http.getInstance().defaults.headers);
 $http.cancelRequest('all');
 $http.cancelWhiteListRequest('all white list');
-/* ...and so more... */
+/* ...... */
 ```
 
 ### 工具类方法
@@ -115,8 +115,8 @@ XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3', 'x'); // [1, 2, 3]
 XHttpUtils.empty(''); // 'null','undefined' 字符串也会被判空
 XHttpUtils.typeof({});
 XHttpUtils.deepClone({});
-XHttpUtils.formatDate(new Date(), 'yyyy-mm-dd hh:ii:ss'); // 参考 php
-/* ...and so more... */
+XHttpUtils.formatDate(new Date(), 'yyyy-mm-dd hh:ii:ss S Q W', ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']); // 参考 php date
+/* ...... */
 ```
 
 ### XHttpMethod
@@ -145,7 +145,7 @@ Axios.get('/axios')
     console.log(response.config);
   })
   .catch((e) => {});
-/* ...and so more... */
+/* ...... */
 ```
 
 * [Axios 参考文档](https://www.axios-http.cn/docs/intro)

@@ -9,7 +9,7 @@
     "demo": "node ./test.js"
   },
   "dependencies": {
-    "js-xhttp": "^1.1.1"
+    "js-xhttp": "^1.1.3"
   },
   "devDependencies": {
     "koa": "^2.13.4",

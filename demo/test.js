@@ -22,7 +22,7 @@ let $http = new XHttp(
       return config;
     },
     requestFinally: () => {
-      console.log('requestFinally Handler');
+      console.log('requestFinally Hooks');
     }
   },
   {
