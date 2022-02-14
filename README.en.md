@@ -59,7 +59,7 @@ const $http = new XHttp(
       console.log('errorHandler', error); // Intercept processing after error
     },
     setRequestHeaders: (config) => {
-      return config; // Returns the configuration object, and the request header can be modified. must return an object, otherwise an error will be thrown.
+      return config; // Returns the configuration object, and the request header can be modified. must return an Headers object, otherwise an error will be thrown.
     },
     requestFinally: () => {
       console.log('requestFinally Handler'); // The callback when the request is completed, regardless of the result.

@@ -59,7 +59,7 @@ const $http = new XHttp(
       console.log('errorHandler', error); // 错误处理 可自行打印日志log
     },
     setRequestHeaders: (config) => {
-      return config; // 返回配置对象，可修改请求头。必须返回一个对象，否则会抛出错误。
+      return config; // 返回配置对象，可修改请求头。必须返回一个请求头对象，否则会抛出错误。
     },
     requestFinally: () => {
       console.log('requestFinally Handler'); // 请求完成时的回调，无论结果如何。

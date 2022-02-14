@@ -486,7 +486,7 @@
             var _loop_1 = function (key) {
                 var val = obj[key];
                 if (Array.isArray(val)) {
-                    val = val.filter(Boolean).map(function (i) { return _this.typeof(i) === 'string' ? i : JSON.stringify(i); }).join(',');
+                    val = val.filter(Boolean).map(function (i) { return _this.typeof(i) === 'string' ? i : JSON.stringify(i); });
                     if (arr2str) {
                         search.push("".concat(key, "=").concat(val.join(',')));
                     }
