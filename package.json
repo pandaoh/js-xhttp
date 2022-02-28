@@ -70,8 +70,6 @@
     "koa-router": "^10.1.1",
     "node-cmd": "^5.0.0",
     "rollup": "^2.67.0",
-    "rollup-plugin-export-default": "^1.4.0",
-    "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-polyfill-node": "^0.8.0",
     "rollup-plugin-terser": "^7.0.2",

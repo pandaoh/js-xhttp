@@ -5,7 +5,7 @@
   "main": "test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "npm install && node ./server/server.js",
+    "server": "npm install && nodemon ./server/server.js",
     "demo": "node ./test.js"
   },
   "dependencies": {
