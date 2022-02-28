@@ -1,6 +1,8 @@
-[js-xhttp - v1.1.5](../README.md) / XHttpUtils
+[js-xhttp - v1.2.0](../README.md) / XHttpUtils
 
 # Class: XHttpUtils
+
+XHttp Utils 工具类单例
 
 ## Table of contents
 

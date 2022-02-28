@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosRequestConfig } from 'axios';
-export declare const Axios: import("axios").AxiosStatic;
+declare const Axios: import("axios").AxiosStatic;
 interface Header {
     Origin?: string;
     Referer?: string;
@@ -35,7 +35,7 @@ interface XHttpOptions {
     requestFinally?: () => void;
     setRequestHeaders?: HandlerFunction<object>;
 }
-export declare enum XHttpMethod {
+declare enum XHttpMethod {
     GET = "GET",
     POST = "POST",
     PUT = "PUT",
@@ -43,48 +43,7 @@ export declare enum XHttpMethod {
     PATCH = "PATCH",
     OPTIONS = "OPTIONS"
 }
-export declare class XHttp {
-    instance: AxiosInstance;
-    timeout: number;
-    private _retryConfig;
-    private _requestHandler;
-    private _responseHandler;
-    private _errorHandler;
-    private _requestFinally;
-    private _setRequestHeaders;
-    private _pendingRequests;
-    private _cancelDuplicatedRequest;
-    private _cancelTokens;
-    private _whiteListCancelTokens;
-    private _defaultAxiosConfig;
-    constructor(options?: XHttpOptions, axiosConfig?: AxiosRequestConfig<any>);
-    private _initAxiosRetry;
-    private _initInterceptors;
-    private _addPendingRequest;
-    private _removePendingRequest;
-    request(method: XHttpMethod, url: string, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    get(url: string, params?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    post(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    put(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    patch(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    delete(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    postForm(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    postFile(url: string, file: File, name?: string, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    cancelRequest(message: string): XHttp;
-    cancelWhiteListRequest(message: string): XHttp;
-    getCancelToken(): any;
-    getBaseURL(): string | undefined;
-    setBaseURL(url?: string): XHttp;
-    getHeaders(): any;
-    setHeaders(headers: any): XHttp;
-    getHeader(key: string): any;
-    setHeader(key: string, val?: string): XHttp;
-    setRequestTimeout(timeout: number): XHttp;
-    getAuthToken(): any;
-    setAuthToken(token: string): XHttp;
-    getInstance(): AxiosInstance;
-}
-export declare class XHttpUtils {
+declare class XHttpUtils {
     private static instance;
     private constructor();
     static getInstance(): XHttpUtils;
@@ -127,5 +86,49 @@ export declare class XHttpUtils {
     static base64Encode(str: string): string;
     static base64Decode(str: string): string;
 }
-export {};
+declare class XHttpClass {
+    instance: AxiosInstance;
+    timeout: number;
+    private _retryConfig;
+    private _requestHandler;
+    private _responseHandler;
+    private _errorHandler;
+    private _requestFinally;
+    private _setRequestHeaders;
+    private _pendingRequests;
+    private _cancelDuplicatedRequest;
+    private _cancelTokens;
+    private _whiteListCancelTokens;
+    private _defaultAxiosConfig;
+    constructor(options?: XHttpOptions, axiosConfig?: AxiosRequestConfig<any>);
+    private _initAxiosRetry;
+    private _initInterceptors;
+    private _addPendingRequest;
+    private _removePendingRequest;
+    request(method: XHttpMethod, url: string, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    get(url: string, params?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    post(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    put(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    patch(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    delete(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    postForm(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    postFile(url: string, file: File, name?: string, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    cancelRequest(message: string): XHttpClass;
+    cancelWhiteListRequest(message: string): XHttpClass;
+    getCancelToken(): any;
+    getBaseURL(): string | undefined;
+    setBaseURL(url?: string): XHttpClass;
+    getHeaders(): any;
+    setHeaders(headers: any): XHttpClass;
+    getHeader(key: string): any;
+    setHeader(key: string, val?: string): XHttpClass;
+    setRequestTimeout(timeout: number): XHttpClass;
+    getAuthToken(): any;
+    setAuthToken(token: string): XHttpClass;
+    getInstance(): AxiosInstance;
+    create(options?: XHttpOptions, axiosConfig?: AxiosRequestConfig<any>): XHttpClass;
+}
+declare const XHttp: XHttpClass;
+export { XHttp, XHttpMethod, XHttpUtils, Axios };
+export default XHttp;
 //# sourceMappingURL=index.d.ts.map

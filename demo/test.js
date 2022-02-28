@@ -1,8 +1,7 @@
-const { XHttp, XHttpMethod, XHttpUtils, Axios } = require('../dist/xhttp');
+const { XHttp, XHttpMethod, XHttpUtils, Axios } = require('../lib/index.js');
 // const { XHttp, XHttpMethod, XHttpUtils, Axios } = require('js-xhttp');
 // import { XHttp, XHttpMethod, XHttpUtils, Axios } from 'js-xhttp'; // 使用 import 导入 package.json[type] = "modules"
-
-let $http = new XHttp(
+let $http = XHttp.create(
   {
     timeout: 1000,
     cancelDuplicatedRequest: true,
@@ -38,11 +37,11 @@ let $http = new XHttp(
 // console.log($http.getInstance().defaults.headers);
 
 $http.get('/test', { start: 0, count: 20 }, {});
-// $http.get('/200', { start: 0, count: 20 }, {});
-// $http.get('/200', { start: 0, count: 20 }, {});
-// $http.get('/200', { start: 0, count: 20 }, {});
-// $http.get('/200', { start: 0, count: 20 }, {});
-// $http.get('/200', { start: 0, count: 20 }, {});
+XHttp.get('/200', { start: 0, count: 20 }, {});
+// XHttp.get('/200', { start: 0, count: 20 }, {});
+// XHttp.get('/200', { start: 0, count: 20 }, {});
+// XHttp.get('/200', { start: 0, count: 20 }, {});
+// XHttp.get('/200', { start: 0, count: 20 }, {});
 // $http.get('/200', { start: 0, count: 20 }, {});
 // $http.get('/200', { start: 0, count: 20 }, {});
 // $http.get('/200', { start: 0, count: 20 }, {});

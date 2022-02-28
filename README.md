@@ -33,6 +33,7 @@ npm install js-xhttp -S
 ```javascript
 const { XHttp, XHttpMethod, XHttpUtils, Axios } = require('js-xhttp');
 import { XHttp, XHttpMethod, XHttpUtils, Axios } from 'js-xhttp';
+import XHttp from 'js-xhttp';
 ```
 
 ## 使用
@@ -41,7 +42,7 @@ import { XHttp, XHttpMethod, XHttpUtils, Axios } from 'js-xhttp';
 
 ```javascript
 // 全局初始化一个实例即可，所有配置如下，均为可选参数。也可以直接 new XHttp(); 初始化。
-const $http = new XHttp(
+const $http = XHttp.create(
   {
     timeout: 1000, // 超时时间 default: 30000
     cancelDuplicatedRequest: true, // 是否取消重复请求 default: true
@@ -70,13 +71,32 @@ const $http = new XHttp(
   }
 );
 
-export default { XHttp: $http, XHttpMethod, axios: Axios, XHttpUtils };
+export { XHttp: $http, XHttpMethod, axios: Axios, XHttpUtils };
 // 后续项目使用引入此文件即可，若项目已经使用了 axios，也可以兼容使用。
 ```
 
 ### 基础请求
 
 ```javascript
+XHttp.get('/tests', { start: 0, count: 20 }, {});
+XHttp
+  .post(
+  '/login',
+  { username: 'test', password: '123456' },
+  { headers: { 'Content-Type': 'application/json' }}
+  ).then((res) => {
+    console.log('res', res);
+  })
+  .catch((err) => {
+    console.log('err', err);
+  })
+  .finally(() => {
+    console.log('finally TEST');
+  });
+XHttp.get('/test', { start: 0, count: 20 }, {}, true); 
+// 白名单不可取消 除非调用 cancelWhiteListRequest()
+XHttp.request(XHttpMethod.GET, '/tests', { start: 0, count: 20 }, {}, true);
+
 $http.get('/tests', { start: 0, count: 20 }, {});
 $http
   .post(
@@ -105,6 +125,12 @@ $http.setBaseURL('http://localhost:666');
 console.log($http.getInstance().defaults.headers);
 $http.cancelRequest('all');
 $http.cancelWhiteListRequest('all white list');
+
+XHttp.setAuthToken('test token');
+XHttp.setBaseURL('http://localhost:666');
+console.log(XHttp.getInstance().defaults.headers);
+XHttp.cancelRequest('all');
+XHttp.cancelWhiteListRequest('all white list');
 /* ...... */
 ```
 

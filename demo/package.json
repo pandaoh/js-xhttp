@@ -1,6 +1,6 @@
 {
   "name": "xhttp-demo",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "XHttp demo",
   "main": "test.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "demo": "node ./test.js"
   },
   "dependencies": {
-    "js-xhttp": "^1.1.5"
+    "js-xhttp": "^1.2.0"
   },
   "devDependencies": {
     "koa": "^2.13.4",

@@ -1,0 +1,20 @@
+{
+  "name": "webpack_base",
+  "version": "1.0.0",
+  "description": "webpack base",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js"
+  },
+  "keywords": [
+    "base"
+  ],
+  "author": "hxb",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {}
+}

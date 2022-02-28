@@ -1,8 +1,12 @@
-js-xhttp - v1.1.5
+js-xhttp - v1.2.0
 
-# js-xhttp - v1.1.5
+# js-xhttp - v1.2.0
 
 ## Table of contents
+
+### References
+
+- [default](README.md#default)
 
 ### Enumerations
 
@@ -10,15 +14,27 @@ js-xhttp - v1.1.5
 
 ### Classes
 
-- [XHttp](classes/XHttp.md)
 - [XHttpUtils](classes/XHttpUtils.md)
 
 ### Variables
 
 - [Axios](README.md#axios)
+- [XHttp](README.md#xhttp)
+
+## References
+
+### default
+
+Renames and re-exports [XHttp](README.md#xhttp)
 
 ## Variables
 
 ### Axios
 
 • **Axios**: `AxiosStatic` = `axios`
+
+___
+
+### XHttp
+
+• **XHttp**: `XHttpClass`
