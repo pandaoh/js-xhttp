@@ -1,4 +1,4 @@
-[js-xhttp - v1.2.0](../README.md) / XHttpUtils
+[js-xhttp - v1.3.0](../README.md) / XHttpUtils
 
 # Class: XHttpUtils
 
@@ -427,16 +427,21 @@ ___
 
 ### qsStringify
 
-▸ `Static` **qsStringify**(`obj`, `arr2str?`): `string`
+▸ `Static` **qsStringify**(`obj`, `options`): `string`
 
-对象转 querystring
+对象转 querystring 暂时只支持两层数据，第二层对象与与数组值不能为引用类型。
+{ a: {test: 1}, b: [1, 2, 3], c: 'd' } => a[test]=1&b[]=1&b[]=2&b[]=3&c=d
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `obj` | `any` | `undefined` |
-| `arr2str` | `boolean` | `false` |
+| Name | Type |
+| :------ | :------ |
+| `obj` | `any` |
+| `options` | `Object` |
+| `options.arr2str?` | `boolean` |
+| `options.hasBrackets` | `boolean` |
+| `options.hasIndex?` | `boolean` |
+| `options.urlEncode?` | `boolean` |
 
 #### Returns
 

@@ -41,7 +41,7 @@ import XHttp from 'js-xhttp';
 ### Initialize an instance
 
 ```javascript
-// globally initialize an instance. All configurations are as follows, all optional parameters. You can also new XHttp (); initialize directly.
+// globally initialize an instance. All configurations are as follows, all optional parameters. You can also XHttp.create(); initialize directly.
 const $http = XHttp.create(
   {
     timeout: 1000, // timeout default: 30000
@@ -94,7 +94,7 @@ XHttp
     console.log('finally TEST');
   });
 XHttp.get('/test', { start: 0, count: 20 }, {}, true); 
-// The whitelist cannot be cancelled unless cancelWhiteListRequest () is called
+// The whitelist cannot be cancelled unless cancelWhiteListRequest() is called
 XHttp.request(XHttpMethod.GET, '/tests', { start: 0, count: 20 }, {}, true);
 
 $http.get('/tests', { start: 0, count: 20 }, {});
@@ -113,7 +113,7 @@ $http
     console.log('finally TEST');
   });
 $http.get('/test', { start: 0, count: 20 }, {}, true); 
-// The whitelist cannot be cancelled unless cancelWhiteListRequest () is called
+// The whitelist cannot be cancelled unless cancelWhiteListRequest() is called
 $http.request(XHttpMethod.GET, '/tests', { start: 0, count: 20 }, {}, true);
 ```
 
@@ -137,8 +137,15 @@ XHttp.cancelWhiteListRequest('all white list');
 ### XHttpUtils methods
 
 ```javascript
-XHttpUtils.qsStringify({ start: 0, count: 20, arr: [1, 2, 3] }); // start=0&count=20&arr=1&arr=2&arr=3
-XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3], str: '1' }, true); // start=0&count=20&obj={"a":1}&arr=1,2,3&str=1
+XHttpUtils.qsStringify();
+XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] }); // start=0&count=20&obj[a]=1&arr[]=1&arr[]=2&arr[]=3
+XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] }, { arr2str: true }); // start=0&count=20&obj[a]=1&arr=1,2,3
+XHttpUtils.qsStringify(
+    { start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3], str: '1' },
+    {
+      hasIndex: true
+    }
+  ); // start=0&count=20&obj[a]=1&arr[0]=1&arr[1]=2&arr[2]=3&str=1
 XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3', 'x'); // [1, 2, 3]
 XHttpUtils.empty(''); // 'null','undefined' => true
 XHttpUtils.typeof({});

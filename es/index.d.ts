@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosRequestConfig } from 'axios';
+import { AxiosInstance, AxiosRequestConfig, Method as AxiosMethod } from 'axios';
 declare const Axios: import("axios").AxiosStatic;
 interface Header {
     Origin?: string;
@@ -49,7 +49,12 @@ declare class XHttpUtils {
     static getInstance(): XHttpUtils;
     static typeof(obj: any): string;
     static empty(obj: any): boolean;
-    static qsStringify(obj: any, arr2str?: boolean): string;
+    static qsStringify(obj: any, options: {
+        arr2str?: boolean;
+        hasIndex?: boolean;
+        urlEncode?: boolean;
+        hasBrackets: boolean;
+    }): string;
     static qsParse(url?: string, key?: string): any;
     static data2Obj: (arr: {
         [key: string]: any;
@@ -105,14 +110,14 @@ declare class XHttpClass {
     private _initInterceptors;
     private _addPendingRequest;
     private _removePendingRequest;
-    request(method: XHttpMethod, url: string, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    request(method: XHttpMethod | AxiosMethod, url: string, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
     get(url: string, params?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
     post(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
     put(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
     patch(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
     delete(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
     postForm(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    postFile(url: string, file: File, name?: string, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    postFile(url: string, files: File | File[], name?: string, hasIndex?: boolean, hasBrackets?: boolean, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
     cancelRequest(message: string): XHttpClass;
     cancelWhiteListRequest(message: string): XHttpClass;
     getCancelToken(): any;

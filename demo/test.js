@@ -79,8 +79,17 @@ Axios.get('/axios')
   })
   .catch((e) => {});
 
-console.log(XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] })); // start=0&count=20&obj={"a":1}&arr=1&arr=2&arr=3
-console.log(XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3], str: '1' }, true)); // start=0&count=20&obj={"a":1}&arr=1,2,3&str=1
+console.log(XHttpUtils.qsStringify());
+console.log(XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] })); // start=0&count=20&obj[a]=1&arr[]=1&arr[]=2&arr[]=3
+console.log(XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] }, { arr2str: true })); // start=0&count=20&obj[a]=1&arr=1,2,3
+console.log(
+  XHttpUtils.qsStringify(
+    { start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3], str: '1' },
+    {
+      hasIndex: true
+    }
+  )
+); // start=0&count=20&obj[a]=1&arr[0]=1&arr[1]=2&arr[2]=3&str=1
 // console.log(XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3')); // { '/': 'start=0&count=20&x=1&x=2&x=3', count: '20',x: [ '1', '2', '3' ] }
 // console.log(XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3', 'x')); // [ '1', '2', '3' ]
 // console.log(XHttpUtils.data2Obj([{ a: 1, b: 2 }, { a: 3 }, { b: 1 }, { c: 1 }], 'a')); // { '1': { a: 1, b: 2 }, '3': { a: 3 }, undefined: { c: 1 } }

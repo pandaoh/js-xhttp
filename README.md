@@ -41,7 +41,7 @@ import XHttp from 'js-xhttp';
 ### 初始化实例
 
 ```javascript
-// 全局初始化一个实例即可，所有配置如下，均为可选参数。也可以直接 new XHttp(); 初始化。
+// 全局初始化一个实例即可，所有配置如下，均为可选参数。也可以直接 XHttp.create(); 初始化。
 const $http = XHttp.create(
   {
     timeout: 1000, // 超时时间 default: 30000
@@ -137,8 +137,15 @@ XHttp.cancelWhiteListRequest('all white list');
 ### 工具类方法
 
 ```javascript
-XHttpUtils.qsStringify({ start: 0, count: 20, arr: [1, 2, 3] }); // start=0&count=20&arr=1&arr=2&arr=3
-XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3], str: '1' }, true); // start=0&count=20&obj={"a":1}&arr=1,2,3&str=1
+XHttpUtils.qsStringify();
+XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] }); // start=0&count=20&obj[a]=1&arr[]=1&arr[]=2&arr[]=3
+XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] }, { arr2str: true }); // start=0&count=20&obj[a]=1&arr=1,2,3
+XHttpUtils.qsStringify(
+    { start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3], str: '1' },
+    {
+      hasIndex: true
+    }
+  ); // start=0&count=20&obj[a]=1&arr[0]=1&arr[1]=2&arr[2]=3&str=1
 XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3', 'x'); // [1, 2, 3]
 XHttpUtils.empty(''); // 'null','undefined' 字符串也会被判空
 XHttpUtils.typeof({});
