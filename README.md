@@ -194,4 +194,6 @@ Axios.get('/axios')
 
 * 此工具类基于 [axios](https://github.com/axios/axios) 二次封装实现
 * 问题反馈可以建 [Issue](https://github.com/pandaoh/js-xhttp/issues)，或者提交 [Pull Request](https://github.com/pandaoh/js-xhttp/pulls)，邮箱：[hxbpandaoh@163.com](mailto:hxbpandaoh@163.com)
+* [Blog](http://a.biugle.cn)
+* Leo He
 * 更多功能完善中...
