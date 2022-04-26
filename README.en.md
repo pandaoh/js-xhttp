@@ -193,7 +193,7 @@ Axios.get('/axios')
 ## Others
 
 * XHttp is based on [axios](https://github.com/axios/axios) secondary encapsulation implementation.
-* For problem feedback, you can create [Issue](https://github.com/pandaoh/js-xhttp/issues) or submit [Pull Request](https://github.com/pandaoh/js-xhttp/pulls), email: [hxbpandaoh@163.com](mailto:hxbpandaoh@163.com)).
+* For problem feedback, you can create [Issue](https://github.com/pandaoh/js-xhttp/issues) or submit [Pull Request](https://github.com/pandaoh/js-xhttp/pulls), email: [hxbpandaoh@163.com](mailto:hxbpandaoh@163.com).
 * [Blog](http://a.biugle.cn)
 * Leo He
 * More functions are being improved...
