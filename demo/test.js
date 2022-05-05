@@ -78,31 +78,3 @@ Axios.get('/axios')
     // console.log(response.config);
   })
   .catch((e) => {});
-
-console.log(XHttpUtils.qsStringify());
-console.log(XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] })); // start=0&count=20&obj[a]=1&arr[]=1&arr[]=2&arr[]=3
-console.log(XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] }, { arr2str: true })); // start=0&count=20&obj[a]=1&arr=1,2,3
-console.log(
-  XHttpUtils.qsStringify(
-    { start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3], str: '1' },
-    {
-      hasIndex: true
-    }
-  )
-); // start=0&count=20&obj[a]=1&arr[0]=1&arr[1]=2&arr[2]=3&str=1
-// console.log(XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3')); // { '/': 'start=0&count=20&x=1&x=2&x=3', count: '20',x: [ '1', '2', '3' ] }
-// console.log(XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3', 'x')); // [ '1', '2', '3' ]
-// console.log(XHttpUtils.data2Obj([{ a: 1, b: 2 }, { a: 3 }, { b: 1 }, { c: 1 }], 'a')); // { '1': { a: 1, b: 2 }, '3': { a: 3 }, undefined: { c: 1 } }
-// console.log(XHttpUtils.data2Obj([{ a: 1, b: 'b1' }, { a: 3 }, { a: 2, b: 'b2' }], 'a', 'b')); // { '1': 'b1', '2': 'b2', '3': undefined }
-// console.log(XHttpUtils.data2Arr([{ a: 1, b: 2 }, { a: 3 }, { b: 1 }], 'a')); // [ 1, 3 ]
-// console.log(XHttpUtils.getV('', { name: { children: 123 } }, 'name', 'children')); // 123
-// console.log(XHttpUtils.getV('xtest', { name: { children: 123 } }, 'name', 'x')); // xtest
-// console.log(XHttpUtils.get1Var([1, 2])); // 1
-// console.log(XHttpUtils.get1Var({ a: 2, b: 1 })); // 2
-// console.log(XHttpUtils.mergeObj({ name: 1, oldValue: 2 }, { name: 3, value: 4 }, [])); // { name: 1, oldValue: 2, value: 4 }
-// console.log(XHttpUtils.mergeObj({ name: 1, oldValue: 2 }, { name: 3, value: 4 }, ['name'], true)); // { name: 3, value: 4 }
-// console.log(
-//   XHttpUtils.formatDate(new Date(), 'yyyy-mm-dd hh:ii:ss S Q W', ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'])
-// ); // 2022-02-14 18:12:12 395 1 Mon
-console.log(XHttpUtils.getRandStr()); // '76155086'
-console.log(XHttpUtils.getUId(0), XHttpUtils.getUId()); // 15901241814022022 kxyds0p0vwg

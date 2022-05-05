@@ -20,7 +20,7 @@
 * 请求重试 `axios-retry`
 * 默认错误处理，也可自定义。
 * 提供实例默认配置修改方法
-* 提供常用请求相关方法工具类 `XHttpUtils` (单例-无需初始化)
+* 提供常用请求相关方法工具类 `XHttpUtils` (单例-无需初始化-`1.4.0` 及以上版本取消-迁移至 [js-xxx JavaScript 常用函数库](https://www.npmjs.com/package/js-xxx))
 
 ## 安装
 
@@ -137,20 +137,7 @@ XHttp.cancelWhiteListRequest('all white list');
 ### 工具类方法
 
 ```javascript
-XHttpUtils.qsStringify();
-XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] }); // start=0&count=20&obj[a]=1&arr[]=1&arr[]=2&arr[]=3
-XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] }, { arr2str: true }); // start=0&count=20&obj[a]=1&arr=1,2,3
-XHttpUtils.qsStringify(
-    { start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3], str: '1' },
-    {
-      hasIndex: true
-    }
-  ); // start=0&count=20&obj[a]=1&arr[0]=1&arr[1]=2&arr[2]=3&str=1
-XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3', 'x'); // [1, 2, 3]
-XHttpUtils.empty(''); // 'null','undefined' 字符串也会被判空
-XHttpUtils.typeof({});
-XHttpUtils.deepClone({});
-XHttpUtils.formatDate(new Date(), 'yyyy-mm-dd hh:ii:ss S Q W', ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']); // 参考 php date
+XHttpUtils.typeof({}); // 'object'
 /* ...... */
 ```
 

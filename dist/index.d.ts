@@ -7,7 +7,7 @@ interface Header {
     Connection?: string;
     'User-Agent'?: string;
     'Content-Type'?: string;
-    'Authorization'?: string;
+    Authorization?: string;
     [propName: string]: any;
 }
 interface Response<T = any> {
@@ -48,48 +48,6 @@ declare class XHttpUtils {
     private constructor();
     static getInstance(): XHttpUtils;
     static typeof(obj: any): string;
-    static empty(obj: any): boolean;
-    static qsStringify(obj: any, options: {
-        arr2str?: boolean;
-        hasIndex?: boolean;
-        urlEncode?: boolean;
-        hasBrackets: boolean;
-    }): string;
-    static qsParse(url?: string, key?: string): any;
-    static data2Obj: (arr: {
-        [key: string]: any;
-    }[], key: string, vKey?: string | undefined) => {
-        [key: string]: any;
-    };
-    static data2Arr: (obj: {
-        [key: string]: any;
-    }[], key: string) => any[];
-    static getV(defaultResult: any, ...args: any): any;
-    static get1Var(data: any): any;
-    static sleep(milliseconds: number | undefined): Promise<void>;
-    static arraySet(arr: string | Iterable<any> | null | undefined): string | Iterable<any> | null | undefined;
-    static deepClone(data: any): any;
-    static mergeObj(oldObj: {
-        [key: string]: any;
-    }, newObj: {
-        [key: string]: any;
-    }, keys?: string | string[], noOld?: boolean): {
-        [key: string]: any;
-    };
-    static getRandNum(min?: number, max?: number): number;
-    static getRandColor(): string;
-    static getRandStr(pow?: number): string;
-    static getUId(pow?: number, radix?: number | undefined): string;
-    static str2html(value: string): string;
-    static html2str(value: string): string | null;
-    static unicode2str(value: string): string;
-    static str2unicode(value: string): string;
-    static trim(str: string, type?: number | string): string;
-    static formatFormData(obj: any): FormData;
-    static formatBytes(bytes: number, precision?: number): string;
-    static formatDate(date: Date, fmt?: string, weeks?: any[]): string;
-    static base64Encode(str: string): string;
-    static base64Decode(str: string): string;
 }
 declare class XHttpClass {
     instance: AxiosInstance;

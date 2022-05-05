@@ -20,7 +20,7 @@
 * Request to retry `axios-retry`.
 * Default error handling, which can also be customized.
 * Provide a method for modifying the default configuration of an instance.
-* Provide common request-related method tool class `XHttpUtils`. (Singleton Class-no initialization required)
+* Provide common request-related method tool class `XHttpUtils`. (Singleton Class-no initialization required-`1.4.0` and above cancel-transfer to [js-xxx JavaScript Function Library](https://www.npmjs.com/package/js-xxx))
 
 ## Install
 
@@ -137,20 +137,7 @@ XHttp.cancelWhiteListRequest('all white list');
 ### XHttpUtils methods
 
 ```javascript
-XHttpUtils.qsStringify();
-XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] }); // start=0&count=20&obj[a]=1&arr[]=1&arr[]=2&arr[]=3
-XHttpUtils.qsStringify({ start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3] }, { arr2str: true }); // start=0&count=20&obj[a]=1&arr=1,2,3
-XHttpUtils.qsStringify(
-    { start: 0, count: 20, obj: { a: 1 }, arr: [1, 2, 3], str: '1' },
-    {
-      hasIndex: true
-    }
-  ); // start=0&count=20&obj[a]=1&arr[0]=1&arr[1]=2&arr[2]=3&str=1
-XHttpUtils.qsParse('start=0&count=20&x=1&x=2&x=3', 'x'); // [1, 2, 3]
-XHttpUtils.empty(''); // 'null','undefined' => true
-XHttpUtils.typeof({});
-XHttpUtils.deepClone({});
-XHttpUtils.formatDate(new Date(), 'yyyy-mm-dd hh:ii:ss S Q W', ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']); // Refer php date
+XHttpUtils.typeof({}); // 'object'
 /* ...and so more... */
 ```
 

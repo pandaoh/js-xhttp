@@ -102,16 +102,6 @@
         return ar;
     }
 
-    function __spreadArray(to, from, pack) {
-        if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-            if (ar || !(i in from)) {
-                if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-                ar[i] = from[i];
-            }
-        }
-        return to.concat(ar || Array.prototype.slice.call(from));
-    }
-
     var Axios = axios__default["default"];
     exports.XHttpMethod = void 0;
     (function (XHttpMethod) {
@@ -133,269 +123,6 @@
         };
         XHttpUtils.typeof = function (obj) {
             return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
-        };
-        XHttpUtils.empty = function (obj) {
-            if (typeof obj === "boolean") {
-                return false;
-            }
-            if (obj === "null") {
-                return true;
-            }
-            if (obj === "undefined") {
-                return true;
-            }
-            if (!obj && obj !== 0) {
-                return true;
-            }
-            if (Array.isArray(obj) && obj.length === 0) {
-                return true;
-            }
-            if (Object.prototype.toString.call(obj) === "[object Object]" && Object.keys(obj).length === 0) {
-                return true;
-            }
-            return false;
-        };
-        XHttpUtils.qsStringify = function (obj, options) {
-            var _this = this;
-            if (!obj) {
-                return "";
-            }
-            var queryString = new URLSearchParams();
-            Object.keys(obj).forEach(function (key) {
-                var val = obj[key];
-                switch (_this.typeof(val)) {
-                    case 'object':
-                        Object.keys(val).forEach(function (objKey) {
-                            queryString.append("".concat(key, "[").concat(objKey, "]"), _this.typeof(val[objKey]) == 'object' ? JSON.stringify(val[objKey]) : val[objKey]);
-                        });
-                        break;
-                    case 'array':
-                        if (options === null || options === void 0 ? void 0 : options.arr2str) {
-                            queryString.append(key, val.join(','));
-                        }
-                        else {
-                            val.filter(Boolean).forEach(function (arrVal, arrIndex) {
-                                var newArrVal = _this.typeof(arrVal) == 'object' ? JSON.stringify(arrVal) : arrVal;
-                                (options === null || options === void 0 ? void 0 : options.hasBrackets) ? queryString.append((options === null || options === void 0 ? void 0 : options.hasIndex) ? "".concat(key, "[").concat(arrIndex, "]") : "".concat(key, "[]"), newArrVal) : queryString.append(key, newArrVal);
-                            });
-                        }
-                        break;
-                    default:
-                        queryString.append(key, val);
-                        break;
-                }
-            });
-            return (options === null || options === void 0 ? void 0 : options.urlEncode) ? queryString.toString() : decodeURIComponent(queryString.toString());
-        };
-        XHttpUtils.qsParse = function (url, key) {
-            var pathname = url !== null && url !== void 0 ? url : window.location.pathname;
-            url = url !== null && url !== void 0 ? url : window.location.search;
-            var filename = pathname.substring(pathname.lastIndexOf('/') + 1);
-            var paramMap = {
-                '/': filename !== null && filename !== void 0 ? filename : undefined
-            };
-            var querystring = (url.indexOf('?') === 0) ? url.substring(1) : url;
-            if (querystring.length !== 0) {
-                var parts = querystring.split('&');
-                for (var i = 0; i < parts.length; i++) {
-                    var component = parts[i].split('=');
-                    var paramKey = decodeURIComponent(component[0]);
-                    var paramVal = decodeURIComponent(component[1]);
-                    if (!paramMap[paramKey]) {
-                        paramMap[paramKey] = paramVal;
-                        continue;
-                    }
-                    !Array.isArray(paramMap[paramKey]) && (paramMap[paramKey] = Array(paramMap[paramKey]));
-                    paramMap[paramKey].push(paramVal);
-                }
-            }
-            return (key) ? paramMap === null || paramMap === void 0 ? void 0 : paramMap[key] : paramMap;
-        };
-        XHttpUtils.getV = function (defaultResult) {
-            var args = [];
-            for (var _i = 1; _i < arguments.length; _i++) {
-                args[_i - 1] = arguments[_i];
-            }
-            return args.length >= 2
-                ? args.reduce(function (a, b) {
-                    return a && a.hasOwnProperty(b) ? a[b] : defaultResult;
-                })
-                : defaultResult;
-        };
-        XHttpUtils.get1Var = function (data) {
-            if (this.typeof(data) !== 'object' && !Array.isArray(data)) {
-                return data;
-            }
-            for (var key in data) {
-                var result = data[key];
-                return result;
-            }
-        };
-        XHttpUtils.sleep = function (milliseconds) {
-            return new Promise(function (resolve) { return setTimeout(resolve, milliseconds); });
-        };
-        XHttpUtils.arraySet = function (arr) {
-            if (!Array.isArray(arr)) {
-                return arr;
-            }
-            if (arr.length == 1) {
-                return arr;
-            }
-            return __spreadArray([], __read(new Set(arr)), false);
-        };
-        XHttpUtils.deepClone = function (data) {
-            if (this.typeof(data) !== 'object' || !Array.isArray(data)) {
-                return data;
-            }
-            var result = Array.isArray(data) ? [] : {};
-            for (var i in data) {
-                result[i] = this.deepClone(data[i]);
-            }
-            return result;
-        };
-        XHttpUtils.mergeObj = function (oldObj, newObj, keys, noOld) {
-            if (noOld === void 0) { noOld = false; }
-            for (var newKey in newObj) {
-                if (this.typeof(newObj[newKey]) === 'object' && this.typeof((oldObj[newKey]) === 'object')) {
-                    oldObj[newKey] = this.mergeObj(oldObj[newKey], newObj[newKey], keys);
-                }
-                else if (Object.keys(oldObj).includes(newKey) && !(keys === null || keys === void 0 ? void 0 : keys.includes(newKey))) ;
-                else {
-                    oldObj[newKey] = newObj[newKey];
-                }
-            }
-            if (noOld) {
-                for (var oldKey in oldObj) {
-                    if (newObj[oldKey] === undefined) {
-                        delete oldObj[oldKey];
-                    }
-                }
-            }
-            return oldObj;
-        };
-        XHttpUtils.getRandNum = function (min, max) {
-            if (min === void 0) { min = 0; }
-            if (max === void 0) { max = 10; }
-            return Math.floor(min + Math.random() * (max - min + 1));
-        };
-        XHttpUtils.getRandColor = function () {
-            return '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
-        };
-        XHttpUtils.getRandStr = function (pow) {
-            if (pow === void 0) { pow = 100000000; }
-            return (Math.random() * pow).toFixed();
-        };
-        XHttpUtils.getUId = function (pow, radix) {
-            if (pow === void 0) { pow = 10000; }
-            if (radix === void 0) { radix = 36; }
-            return pow === 0 ? "".concat(this.formatDate(new Date(), 'Sssiihhddmmyyyy')) : Number("".concat(this.getRandStr(pow)).concat(Date.now())).toString(radix);
-        };
-        XHttpUtils.str2html = function (value) {
-            var div = document.createElement('div');
-            div.textContent = value;
-            var specialChars = div.innerHTML;
-            return specialChars;
-        };
-        XHttpUtils.html2str = function (value) {
-            var div = document.createElement('div');
-            div.innerHTML = value;
-            var str = div.textContent;
-            return str;
-        };
-        XHttpUtils.unicode2str = function (value) {
-            return escape(value).toLocaleLowerCase().replace(/%u/gi, '\\u');
-        };
-        XHttpUtils.str2unicode = function (value) {
-            return unescape(value.replace(/\\u/gi, '%u'));
-        };
-        XHttpUtils.trim = function (str, type) {
-            if (type === void 0) { type = 0; }
-            switch (type) {
-                case 0:
-                case 'ba':
-                    return str = str.trim();
-                case 1:
-                case 'b':
-                    return str = str.replace(/^[\s]*/, "");
-                case 2:
-                case 'a':
-                    return str = str.replace(/[\s]*$/g, "");
-                case 3:
-                case 'all':
-                    return str = str.replace(/\s/g, "");
-                case 4:
-                case 'pro':
-                    return (str = str.replace(/(^\s*)|(\s*$)|\s(?=\s)/g, ""));
-                default:
-                    return str;
-            }
-        };
-        XHttpUtils.formatFormData = function (obj) {
-            var formData = new FormData();
-            for (var key in obj) {
-                formData.append(key, this.typeof(obj[key]) == 'object' ? JSON.stringify(obj[key]) : obj[key]);
-            }
-            return formData;
-        };
-        XHttpUtils.formatBytes = function (bytes, precision) {
-            var _a;
-            if (precision === void 0) { precision = 2; }
-            var units = ['B', 'KB', 'MB', 'GB', 'TB'];
-            var pow = Math.floor((bytes ? Math.log(bytes) : 0) / Math.log(1024));
-            pow = Math.min(pow, units.length - 1);
-            bytes /= (1 << (10 * pow));
-            var unit = (_a = units === null || units === void 0 ? void 0 : units[pow]) !== null && _a !== void 0 ? _a : units[0];
-            return bytes.toFixed(precision) + ' ' + unit;
-        };
-        XHttpUtils.formatDate = function (date, fmt, weeks) {
-            if (fmt === void 0) { fmt = "yyyy-mm-dd hh:ii:ss"; }
-            weeks = weeks !== null && weeks !== void 0 ? weeks : [7, 1, 2, 3, 4, 5, 6];
-            var o = {
-                'm+': date.getMonth() + 1,
-                'd+': date.getDate(),
-                'h+': date.getHours(),
-                'i+': date.getMinutes(),
-                's+': date.getSeconds(),
-                'Q': Math.floor((date.getMonth() + 3) / 3),
-                'S': "".concat(date.getMilliseconds()).padStart(3, '0'),
-                'W': weeks[date.getDay()]
-            };
-            if (/(y+)/.test(fmt)) {
-                fmt = fmt.replace(RegExp.$1, "".concat(date.getFullYear()).substr(4 - RegExp.$1.length));
-            }
-            for (var k in o) {
-                if (new RegExp('(' + k + ')').test(fmt)) {
-                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? o[k] : "00".concat(o[k]).substr(("".concat(o[k]).length)));
-                }
-            }
-            return fmt;
-        };
-        XHttpUtils.base64Encode = function (str) {
-            return Buffer.from(str, 'utf-8').toString('base64');
-        };
-        XHttpUtils.base64Decode = function (str) {
-            return Buffer.from(str, 'base64').toString('utf8');
-        };
-        XHttpUtils.data2Obj = function (arr, key, vKey) {
-            var obj = {};
-            if (!Array.isArray(arr)) {
-                return obj;
-            }
-            arr.forEach(function (item) {
-                obj[item[key]] = vKey ? item[vKey] : item;
-            });
-            return obj;
-        };
-        XHttpUtils.data2Arr = function (obj, key) {
-            var _a;
-            var arr = [];
-            if (obj.length === 0) {
-                return arr;
-            }
-            for (var k in obj) {
-                ((_a = obj[k]) === null || _a === void 0 ? void 0 : _a[key]) && arr.push(obj[k][key]);
-            }
-            return arr;
         };
         return XHttpUtils;
     }());
@@ -448,7 +175,7 @@
                             return true;
                         }
                         return false;
-                    },
+                    }
                 });
             }
         };
@@ -487,7 +214,7 @@
                 return {
                     status: response === null || response === void 0 ? void 0 : response.status,
                     statusText: response === null || response === void 0 ? void 0 : response.statusText,
-                    data: response === null || response === void 0 ? void 0 : response.data,
+                    data: response === null || response === void 0 ? void 0 : response.data
                 };
             }, function (error) {
                 var _a;
@@ -504,12 +231,7 @@
         };
         XHttpClass.prototype._addPendingRequest = function (config) {
             var _this = this;
-            var url = [
-                config.method,
-                config.url,
-                JSON.stringify(config.params),
-                JSON.stringify(config.data)
-            ].join('&');
+            var url = [config.method, config.url, JSON.stringify(config.params), JSON.stringify(config.data)].join('&');
             config.cancelToken = new axios__default["default"].CancelToken(function (cancel) {
                 if (!_this._pendingRequests.has(url)) {
                     _this._pendingRequests.set(url, cancel);
@@ -517,12 +239,7 @@
             });
         };
         XHttpClass.prototype._removePendingRequest = function (config) {
-            var url = [
-                config.method,
-                config.url,
-                JSON.stringify(config.params),
-                JSON.stringify(config.data)
-            ].join('&');
+            var url = [config.method, config.url, JSON.stringify(config.params), JSON.stringify(config.data)].join('&');
             if (this._pendingRequests.has(url)) {
                 var cancel = this._pendingRequests.get(url);
                 cancel(url);
@@ -548,14 +265,17 @@
                         }
                         requestConfig.cancelToken = cancelToken;
                     }
-                    return [2, this.instance.request(requestConfig)
+                    return [2, this.instance
+                            .request(requestConfig)
                             .then(function (data) {
                             return data;
-                        }).catch(function (error) {
+                        })
+                            .catch(function (error) {
                             var _a;
                             (_a = _this._errorHandler) === null || _a === void 0 ? void 0 : _a.call(_this, error);
                             return error;
-                        }).finally(function () {
+                        })
+                            .finally(function () {
                             var _a;
                             (_a = _this._requestFinally) === null || _a === void 0 ? void 0 : _a.call(_this);
                         })];
@@ -624,7 +344,7 @@
                         formData.append(key, XHttpUtils.typeof(data[key]) == 'object' ? JSON.stringify(data[key]) : data[key]);
                     });
                     return [2, this.request(exports.XHttpMethod.POST, url, __assign(__assign({}, config), { data: formData, headers: {
-                                'Content-Type': 'multipart/form-data;charset=UTF-8;',
+                                'Content-Type': 'multipart/form-data;charset=UTF-8;'
                             } }), isWhiteList)];
                 });
             });
@@ -641,14 +361,16 @@
                     formData = new FormData();
                     if (Array.isArray(files)) {
                         files.forEach(function (file, fileIndex) {
-                            hasBrackets ? formData.append(hasIndex ? "".concat(name, "[]") : "".concat(name, "[").concat(fileIndex, "]"), file) : formData.append(name, file);
+                            hasBrackets
+                                ? formData.append(hasIndex ? "".concat(name, "[]") : "".concat(name, "[").concat(fileIndex, "]"), file)
+                                : formData.append(name, file);
                         });
                     }
                     else {
                         formData.append(name, files);
                     }
                     return [2, this.request(exports.XHttpMethod.POST, url, __assign(__assign({}, config), { data: formData, headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded',
+                                'Content-Type': 'application/x-www-form-urlencoded'
                             } }), isWhiteList)];
                 });
             });
