@@ -1,4 +1,4 @@
-[js-xhttp - v1.4.0](../README.md) / XHttpUtils
+[js-xhttp - v1.4.1](../README.md) / XHttpUtils
 
 # Class: XHttpUtils
 
@@ -50,7 +50,7 @@ ___
 ▸ `Static` **typeof**(`obj`): `string`
 
 获取变量类型
-typeof('test') => 'string'
+`typeof('test') => 'string'`
 
 #### Parameters
 

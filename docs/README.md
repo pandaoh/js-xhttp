@@ -1,6 +1,6 @@
-js-xhttp - v1.4.0
+js-xhttp - v1.4.1
 
-# js-xhttp - v1.4.0
+# js-xhttp - v1.4.1
 
 ## Table of contents
 
