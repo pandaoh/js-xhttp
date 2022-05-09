@@ -267,8 +267,8 @@
                     }
                     return [2, this.instance
                             .request(requestConfig)
-                            .then(function (data) {
-                            return data;
+                            .then(function (res) {
+                            return res.data;
                         })
                             .catch(function (error) {
                             var _a;
