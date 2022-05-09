@@ -88,6 +88,7 @@ declare class XHttpClass {
     setRequestTimeout(timeout: number): XHttpClass;
     getAuthToken(): any;
     setAuthToken(token: string): XHttpClass;
+    isCancel(error: any): boolean;
     getInstance(): AxiosInstance;
     create(options?: XHttpOptions, axiosConfig?: AxiosRequestConfig<any>): XHttpClass;
 }

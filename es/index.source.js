@@ -442,6 +442,9 @@ var XHttpClass = (function () {
         this.setHeader('Authorization', token);
         return this;
     };
+    XHttpClass.prototype.isCancel = function (error) {
+        return axios.isCancel(error);
+    };
     XHttpClass.prototype.getInstance = function () {
         return this.instance;
     };
