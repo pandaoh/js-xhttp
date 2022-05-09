@@ -41,38 +41,63 @@ import XHttp from 'js-xhttp';
 ### Initialize an instance
 
 ```javascript
+import XHttp from "js-xhttp";
+import { message, notification } from "@/plugins/antd";
+
 // globally initialize an instance. All configurations are as follows, all optional parameters. You can also XHttp.create(); initialize directly.
 const $http = XHttp.create(
   {
-    timeout: 1000, // timeout default: 30000
+    timeout: 10000, // timeout default: 30000
     cancelDuplicatedRequest: true, // Whether to cancel the duplicate request default: true
-    retryConfig: { // Retry the configuration
+    retryConfig: {
+      // Retry the configuration
       retry: 3, // retry count
-      delay: 1000 // Base delay time for each retry
+      delay: 1000, // Base delay time for each retry
     },
-    requestHandler: (config) => {
-      console.log('requestHandler', config); // Intercept processing before request
+    requestHandler: (config: any) => {
+      console.log("requestHandler", config); // Intercept processing before request
+      console.log(config?.cancelRequest); // Cancel request
     },
-    responseHandler: (response) => {
-      console.log('responseHandler', response.status); // Intercept processing after response
+    responseHandler: (response: any) => {
+      // Response handler before response
+      if (response.data.code != 0) {
+        message.error(response.data.msg);
+      }
     },
-    errorHandler: (error) => {
-      console.log('errorHandler', error); // Intercept processing after error
+    errorHandler: (error: any) => {
+      // Error handler before error
+      if (!XHttp.isCancel(error) && !error.message?.includes("custom-error")) {
+        notification.error({
+          message: `${error.status}-${error.statusText}`,
+          description: `发生错误了 ${error.data?.msg ?? error?.data?.message ?? "未知错误"}`,
+        });
+      }
+      // Whether to pass the error to the outer layer. If not, you can avoid customizing the error handling for each request.
+      // return Promise.reject(error); 
+      console.log("errorHandler", error); // Error log
     },
-    setRequestHeaders: (config) => {
+    setRequestHeaders: (config: any) => {
+      // Set request headers here, you can also use $http.setAuthToken to set the authorization token.
       return config; // Returns the configuration object, and the request header can be modified. must return an Headers object, otherwise an error will be thrown.
     },
     requestFinally: () => {
-      console.log('requestFinally Hooks'); // The callback when the request is completed, regardless of the result.
-    }
+      console.log("requestFinally Hooks"); // The callback when the request is completed, regardless of the result.
+    },
   },
-  { // Compatible with axios configuration
-    baseURL: 'http://localhost:666'
+  // axios configuration
+  {
+    baseURL: import.meta.env.VITE_REQUEST_BASE_URL, // Set the base url by environment variables
+    validateStatus: (status: number) => {
+      // XHttp default status validation rule is all return true.
+      // You can customize the status validation rule here.
+      // Return true means success(resolve), otherwise failure(reject). You can customize the status validation rule here.
+      return status >= 200 && status < 300;
+    },
   }
 );
 
-export { XHttp: $http, XHttpMethod, axios: Axios, XHttpUtils };
-// Subsequent projects can use the introduction of this file, if the project has already used axios, can also be compatible with the use.
+export default $http;
+// You can also use the following methods: get post put patch delete request. You can also use the axios object, tools class, etc.
 ```
 
 ### Basic request

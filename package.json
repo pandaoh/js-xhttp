@@ -1,6 +1,6 @@
 {
   "name": "js-xhttp",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "An HTTP tool is based on Axios that can make ajax more convenient and universal, easier to manage, and more efficient and unified.",
   "main": "lib/index.js",
   "module": "es/index.js",
