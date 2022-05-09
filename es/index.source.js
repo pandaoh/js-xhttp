@@ -185,7 +185,10 @@ var XHttpClass = (function () {
                     throw new Error('XHttp Error: [setRequestHeaders] must be a function, and return a complete object value(RequestConfig) without missing original attributes!');
                 }
             }
-            (_a = _this._requestHandler) === null || _a === void 0 ? void 0 : _a.call(_this, config);
+            if (((_a = _this._requestHandler) === null || _a === void 0 ? void 0 : _a.call(_this, config)) === false) {
+                config === null || config === void 0 ? void 0 : config.cancelRequest();
+                return;
+            }
             return config;
         }, function (error) {
             if (!axios.isCancel(error)) {
@@ -198,11 +201,14 @@ var XHttpClass = (function () {
             return Promise.reject(error);
         });
         this.instance.interceptors.response.use(function (response) {
-            var _a, _b;
+            var _a, _b, _c;
             if (_this._cancelDuplicatedRequest && !((_a = response.config) === null || _a === void 0 ? void 0 : _a.cancelToken)) {
                 _this._removePendingRequest(response);
             }
-            (_b = _this._responseHandler) === null || _b === void 0 ? void 0 : _b.call(_this, response);
+            if (((_b = _this._responseHandler) === null || _b === void 0 ? void 0 : _b.call(_this, response)) === false) {
+                (_c = response.config) === null || _c === void 0 ? void 0 : _c.cancelRequest();
+                return;
+            }
             return {
                 status: response === null || response === void 0 ? void 0 : response.status,
                 statusText: response === null || response === void 0 ? void 0 : response.statusText,
@@ -227,6 +233,7 @@ var XHttpClass = (function () {
         config.cancelToken = new axios.CancelToken(function (cancel) {
             if (!_this._pendingRequests.has(url)) {
                 _this._pendingRequests.set(url, cancel);
+                config.cancelRequest = cancel;
             }
         });
     };
@@ -256,6 +263,7 @@ var XHttpClass = (function () {
                         this._cancelTokens.push(cancelTokenSource);
                     }
                     requestConfig.cancelToken = cancelToken;
+                    requestConfig.cancelRequest = cancelTokenSource.cancel;
                 }
                 return [2, this.instance
                         .request(requestConfig)
