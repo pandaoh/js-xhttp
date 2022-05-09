@@ -153,7 +153,12 @@ var XHttpClass = (function () {
                 },
                 shouldResetTimeout: true,
                 retryCondition: function (error) {
-                    var _a;
+                    var _a, _b, _c;
+                    if (((_a = error.message) === null || _a === void 0 ? void 0 : _a.includes('not-retry')) ||
+                        axios.isCancel(error) ||
+                        ((_b = error.message) === null || _b === void 0 ? void 0 : _b.includes('custom-error'))) {
+                        return false;
+                    }
                     if (axiosRetry.isNetworkOrIdempotentRequestError(error)) {
                         return true;
                     }
@@ -163,7 +168,7 @@ var XHttpClass = (function () {
                     if (['ECONNRESET', 'ETIMEDOUT'].includes(error.code)) {
                         return true;
                     }
-                    if (error.code == 'ECONNABORTED' && ((_a = error.message) === null || _a === void 0 ? void 0 : _a.includes('timeout'))) {
+                    if (error.code == 'ECONNABORTED' && ((_c = error.message) === null || _c === void 0 ? void 0 : _c.includes('timeout'))) {
                         return true;
                     }
                     return false;
@@ -185,10 +190,7 @@ var XHttpClass = (function () {
                     throw new Error('XHttp Error: [setRequestHeaders] must be a function, and return a complete object value(RequestConfig) without missing original attributes!');
                 }
             }
-            if (((_a = _this._requestHandler) === null || _a === void 0 ? void 0 : _a.call(_this, config)) === false) {
-                config === null || config === void 0 ? void 0 : config.cancelRequest();
-                return;
-            }
+            (_a = _this._requestHandler) === null || _a === void 0 ? void 0 : _a.call(_this, config);
             return config;
         }, function (error) {
             if (!axios.isCancel(error)) {
@@ -201,14 +203,11 @@ var XHttpClass = (function () {
             return Promise.reject(error);
         });
         this.instance.interceptors.response.use(function (response) {
-            var _a, _b, _c;
+            var _a, _b;
             if (_this._cancelDuplicatedRequest && !((_a = response.config) === null || _a === void 0 ? void 0 : _a.cancelToken)) {
                 _this._removePendingRequest(response);
             }
-            if (((_b = _this._responseHandler) === null || _b === void 0 ? void 0 : _b.call(_this, response)) === false) {
-                (_c = response.config) === null || _c === void 0 ? void 0 : _c.cancelRequest();
-                return;
-            }
+            (_b = _this._responseHandler) === null || _b === void 0 ? void 0 : _b.call(_this, response);
             return {
                 status: response === null || response === void 0 ? void 0 : response.status,
                 statusText: response === null || response === void 0 ? void 0 : response.statusText,
@@ -272,8 +271,7 @@ var XHttpClass = (function () {
                     })
                         .catch(function (error) {
                         var _a;
-                        (_a = _this._errorHandler) === null || _a === void 0 ? void 0 : _a.call(_this, error);
-                        return error;
+                        return (_a = _this._errorHandler) === null || _a === void 0 ? void 0 : _a.call(_this, error);
                     })
                         .finally(function () {
                         var _a;
