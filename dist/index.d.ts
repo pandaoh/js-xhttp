@@ -74,8 +74,8 @@ declare class XHttpClass {
     put(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
     patch(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
     delete(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    postForm(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    postFile(url: string, files: File | File[], name?: string, hasIndex?: boolean, hasBrackets?: boolean, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    postForm(url: string, data?: any, hasBrackets?: boolean, hasIndex?: boolean, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    postFile(url: string, files: File | File[], name?: string, hasBrackets?: boolean, hasIndex?: boolean, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
     cancelRequest(message: string): XHttpClass;
     cancelWhiteListRequest(message: string): XHttpClass;
     getCancelToken(): any;
