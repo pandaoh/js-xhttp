@@ -31,8 +31,8 @@ npm install js-xhttp -S
 ## 引入
 
 ```javascript
-const { XHttp, XHttpMethod, XHttpUtils, Axios } = require('js-xhttp');
-import { XHttp, XHttpMethod, XHttpUtils, Axios } from 'js-xhttp';
+const { XHttp, XHttpMethod, XHttpUtils, Axios, CODE_MSG } = require('js-xhttp');
+import { XHttp, XHttpMethod, XHttpUtils, Axios, CODE_MSG } from 'js-xhttp';
 import XHttp from 'js-xhttp';
 ```
 

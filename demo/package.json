@@ -10,7 +10,7 @@
     "demo": "node ./test.js"
   },
   "dependencies": {
-    "js-xhttp": "^1.4.1"
+    "js-xhttp": "^1.4.8"
   },
   "devDependencies": {
     "express": "^4.17.3",

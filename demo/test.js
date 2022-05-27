@@ -1,6 +1,9 @@
-const { XHttp, XHttpMethod, XHttpUtils, Axios } = require('../lib/index.js');
-// const { XHttp, XHttpMethod, XHttpUtils, Axios } = require('js-xhttp');
-// import { XHttp, XHttpMethod, XHttpUtils, Axios } from 'js-xhttp'; // 使用 import 导入 package.json[type] = "modules"
+const { XHttp, XHttpMethod, XHttpUtils, Axios, CODE_MSG } = require('../lib/index.js');
+// const { XHttp, XHttpMethod, XHttpUtils, Axios, CODE_MSG } = require('js-xhttp');
+// import { XHttp, XHttpMethod, XHttpUtils, Axios, CODE_MSG } from 'js-xhttp'; // 使用 import 导入 package.json[type] = "modules"
+
+console.log(CODE_MSG);
+
 let $http = XHttp.create(
   {
     timeout: 1000,

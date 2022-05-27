@@ -41,7 +41,13 @@ declare enum XHttpMethod {
     PUT = "PUT",
     DELETE = "DELETE",
     PATCH = "PATCH",
-    OPTIONS = "OPTIONS"
+    OPTIONS = "OPTIONS",
+    get = "GET",
+    post = "POST",
+    put = "PUT",
+    delete = "DELETE",
+    patch = "PATCH",
+    options = "OPTIONS"
 }
 declare class XHttpUtils {
     private static instance;
@@ -92,7 +98,10 @@ declare class XHttpClass {
     getInstance(): AxiosInstance;
     create(options?: XHttpOptions, axiosConfig?: AxiosRequestConfig<any>): XHttpClass;
 }
+declare const CODE_MSG: {
+    [status: number]: string;
+};
 declare const XHttp: XHttpClass;
-export { XHttp, XHttpMethod, XHttpUtils, Axios };
+export { XHttp, XHttpMethod, XHttpUtils, Axios, CODE_MSG };
 export default XHttp;
 //# sourceMappingURL=index.d.ts.map

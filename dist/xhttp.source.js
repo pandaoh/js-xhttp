@@ -111,6 +111,12 @@
         XHttpMethod["DELETE"] = "DELETE";
         XHttpMethod["PATCH"] = "PATCH";
         XHttpMethod["OPTIONS"] = "OPTIONS";
+        XHttpMethod["get"] = "GET";
+        XHttpMethod["post"] = "POST";
+        XHttpMethod["put"] = "PUT";
+        XHttpMethod["delete"] = "DELETE";
+        XHttpMethod["patch"] = "PATCH";
+        XHttpMethod["options"] = "OPTIONS";
     })(exports.XHttpMethod || (exports.XHttpMethod = {}));
     var XHttpUtils = (function () {
         function XHttpUtils() {
@@ -188,6 +194,12 @@
             var _this = this;
             this.instance.interceptors.request.use(function (config) {
                 var _a;
+                if (_this._cancelTokens.length > 100) {
+                    _this._cancelTokens = [];
+                }
+                if (_this._whiteListCancelTokens.length > 100) {
+                    _this._whiteListCancelTokens = [];
+                }
                 if (_this._cancelDuplicatedRequest && !config.cancelToken) {
                     _this._removePendingRequest(config);
                     _this._addPendingRequest(config);
@@ -360,9 +372,9 @@
                             formData.append(key, XHttpUtils.typeof(data[key]) == 'object' ? JSON.stringify(data[key]) : data[key]);
                         }
                     });
-                    return [2, this.request(exports.XHttpMethod.POST, url, __assign(__assign({}, config), { data: formData, headers: {
+                    return [2, this.request(exports.XHttpMethod.POST, url, __assign({ data: formData, headers: {
                                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8;'
-                            } }), isWhiteList)];
+                            } }, config), isWhiteList)];
                 });
             });
         };
@@ -386,9 +398,9 @@
                     else {
                         formData.append(name, files);
                     }
-                    return [2, this.request(exports.XHttpMethod.POST, url, __assign(__assign({}, config), { data: formData, headers: {
+                    return [2, this.request(exports.XHttpMethod.POST, url, __assign({ data: formData, headers: {
                                 'Content-Type': 'multipart/form-data'
-                            } }), isWhiteList)];
+                            } }, config), isWhiteList)];
                 });
             });
         };
@@ -414,6 +426,7 @@
                 this._cancelTokens.forEach(function (cancelTokenSource) {
                     cancelTokenSource === null || cancelTokenSource === void 0 ? void 0 : cancelTokenSource.cancel(message);
                 });
+                this._cancelTokens = [];
             }
             return this;
         };
@@ -421,6 +434,7 @@
             this._whiteListCancelTokens.forEach(function (cancelTokenSource) {
                 cancelTokenSource === null || cancelTokenSource === void 0 ? void 0 : cancelTokenSource.cancel(message);
             });
+            this._whiteListCancelTokens = [];
             return this;
         };
         XHttpClass.prototype.getCancelToken = function () {
@@ -479,9 +493,31 @@
         };
         return XHttpClass;
     }());
+    var CODE_MSG = {
+        200: '服务器成功返回请求的数据。',
+        201: '新建或修改数据成功。',
+        202: '一个请求已经进入后台排队（异步任务）。',
+        204: '删除数据成功。',
+        301: '资源永久移动，请求的资源已被永久的移动到新 URI，返回信息会包括新的 URI，浏览器会自动定向到新 URI。',
+        302: '资源临时移动，只是临时被移动，客户端可继续使用原有 URI。',
+        303: '查看其它地址，与 301 类似，使用 GET 和 POST 请求查看。',
+        304: '资源未修改，所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源。',
+        400: '发出的请求有错误，服务器没有进行新建或修改数据的操作。',
+        401: '用户没有权限（令牌、用户名、密码错误）。',
+        403: '用户得到授权，但是访问是被禁止的。',
+        404: '发出的请求针对的是不存在的记录，服务器没有进行操作。',
+        406: '请求的格式不可得。',
+        410: '请求的资源被永久删除，且不会再得到的。',
+        422: '当创建一个对象时，发生一个验证错误。',
+        500: '服务器发生错误，请检查服务器。',
+        502: '网关错误。',
+        503: '服务不可用，服务器暂时过载或维护。',
+        504: '网关超时。'
+    };
     var XHttp = new XHttpClass();
 
     exports.Axios = Axios;
+    exports.CODE_MSG = CODE_MSG;
     exports.XHttp = XHttp;
     exports.XHttpUtils = XHttpUtils;
     exports["default"] = XHttp;

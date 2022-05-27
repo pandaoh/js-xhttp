@@ -1,6 +1,6 @@
-js-xhttp - v1.4.7
+js-xhttp - v1.4.8
 
-# js-xhttp - v1.4.7
+# js-xhttp - v1.4.8
 
 ## Table of contents
 
@@ -19,6 +19,7 @@ js-xhttp - v1.4.7
 ### Variables
 
 - [Axios](README.md#axios)
+- [CODE\_MSG](README.md#code_msg)
 - [XHttp](README.md#xhttp)
 
 ## References
@@ -32,6 +33,16 @@ Renames and re-exports [XHttp](README.md#xhttp)
 ### Axios
 
 • **Axios**: `AxiosStatic` = `axios`
+
+___
+
+### CODE\_MSG
+
+• **CODE\_MSG**: `Object`
+
+#### Index signature
+
+▪ [status: `number`]: `string`
 
 ___
 
