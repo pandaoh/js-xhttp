@@ -508,4 +508,4 @@ var CODE_MSG = {
 };
 var XHttp = new XHttpClass();
 
-export { Axios, CODE_MSG, XHttp, XHttpMethod, XHttpUtils, XHttp as default };
+export { Axios, CODE_MSG, XHttp, XHttpClass, XHttpMethod, XHttpUtils, XHttp as default };

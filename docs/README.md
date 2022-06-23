@@ -1,6 +1,6 @@
-js-xhttp - v1.4.8
+js-xhttp - v1.4.9
 
-# js-xhttp - v1.4.8
+# js-xhttp - v1.4.9
 
 ## Table of contents
 
@@ -14,6 +14,7 @@ js-xhttp - v1.4.8
 
 ### Classes
 
+- [XHttpClass](classes/XHttpClass.md)
 - [XHttpUtils](classes/XHttpUtils.md)
 
 ### Variables
@@ -48,4 +49,4 @@ ___
 
 ### XHttp
 
-• **XHttp**: `XHttpClass`
+• **XHttp**: [`XHttpClass`](classes/XHttpClass.md)

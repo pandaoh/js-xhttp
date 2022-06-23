@@ -55,7 +55,7 @@ declare class XHttpUtils {
     static getInstance(): XHttpUtils;
     static typeof(obj: any): string;
 }
-declare class XHttpClass {
+export declare class XHttpClass {
     instance: AxiosInstance;
     timeout: number;
     private _retryConfig;

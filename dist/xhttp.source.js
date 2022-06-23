@@ -519,6 +519,7 @@
     exports.Axios = Axios;
     exports.CODE_MSG = CODE_MSG;
     exports.XHttp = XHttp;
+    exports.XHttpClass = XHttpClass;
     exports.XHttpUtils = XHttpUtils;
     exports["default"] = XHttp;
 
