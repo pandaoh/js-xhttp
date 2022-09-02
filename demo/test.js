@@ -8,6 +8,7 @@ let $http = XHttp.create(
   {
     timeout: 1000,
     cancelDuplicatedRequest: true,
+    rejectErrorPromise: false,
     retryConfig: {
       retry: 3,
       delay: 1000
@@ -17,15 +18,21 @@ let $http = XHttp.create(
     },
     responseHandler: (response) => {
       // console.log('responseHandler', response.status);
+      console.log('responseHandler===>response.config', response.config);
     },
-    errorHandler: (error) => {
+    errorHandler: (error, requestConfig) => {
+      console.log('errorHandler===>requestConfig', requestConfig);
       // console.log('errorHandler', error);
+      if (requestConfig.rejectErrorPromise) {
+        console.log('Promise.reject(error)', requestConfig.url);
+        // return Promise.reject(error);
+      }
     },
     setRequestHeaders: (config) => {
       return config;
     },
-    requestFinally: () => {
-      console.log('requestFinally Hooks');
+    requestFinally: (requestConfig) => {
+      console.log('requestFinally Hooks', requestConfig);
     }
   },
   {
@@ -54,9 +61,9 @@ XHttp.get('/200', { start: 0, count: 20 }, {});
 // $http.get('/whitelist', { start: 0, count: 20 }, {}, true);
 // $http.get('/200', { start: 0, count: 21 }, {});
 // $http.get('/200', { start: 0, count: 21 }, {});
-$http.request(XHttpMethod.GET, '/tests', { start: 0, count: 20 }, {}, true);
+$http.request(XHttpMethod.GET, '/tests', { params: { start: 0, count: 20 }, rejectErrorPromise: true }, true);
 $http
-  .post('/login', { username: 'test', password: '123456' })
+  .post('/login', { username: 'test', password: '123456' }, { rejectErrorPromise: true })
   .then((res) => {
     // console.log('res', res);
   })

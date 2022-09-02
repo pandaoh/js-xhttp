@@ -15,23 +15,27 @@ interface Response<T = any> {
     status: number;
     statusText: string;
     headers: Header;
-    config: AxiosRequestConfig;
+    config: RequestConfig;
     request?: any;
 }
-interface RetryConfig {
+interface AxiosRetryConfig {
     retry: number;
     delay: number;
 }
 interface HandlerFunction<T = any> {
     (data: T): T;
 }
+interface ErrorHandlerFunction<T = any> {
+    (data: T, requestConfig: any): T;
+}
 interface XHttpOptions {
-    retryConfig?: RetryConfig;
+    retryConfig?: AxiosRetryConfig;
     timeout?: number;
     cancelDuplicatedRequest?: boolean;
+    rejectErrorPromise?: boolean;
     requestHandler?: HandlerFunction;
     responseHandler?: HandlerFunction;
-    errorHandler?: HandlerFunction;
+    errorHandler?: ErrorHandlerFunction;
     requestFinally?: () => void;
     setRequestHeaders?: HandlerFunction<object>;
 }
@@ -49,6 +53,10 @@ declare enum XHttpMethod {
     patch = "PATCH",
     options = "OPTIONS"
 }
+interface RequestConfig extends AxiosRequestConfig {
+    rejectErrorPromise?: boolean;
+    [key: string]: any;
+}
 declare class XHttpUtils {
     private static instance;
     private constructor();
@@ -58,6 +66,7 @@ declare class XHttpUtils {
 export declare class XHttpClass {
     instance: AxiosInstance;
     timeout: number;
+    private _rejectErrorPromise;
     private _retryConfig;
     private _requestHandler;
     private _responseHandler;
@@ -74,14 +83,14 @@ export declare class XHttpClass {
     private _initInterceptors;
     private _addPendingRequest;
     private _removePendingRequest;
-    request(method: XHttpMethod | AxiosMethod, url: string, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    get(url: string, params?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    post(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    put(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    patch(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    delete(url: string, data?: any, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    postForm(url: string, data?: any, hasBrackets?: boolean, hasIndex?: boolean, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    postFile(url: string, files: File | File[], name?: string, hasBrackets?: boolean, hasIndex?: boolean, config?: AxiosRequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    request(method: XHttpMethod | AxiosMethod, url: string, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    get(url: string, params?: any, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    post(url: string, data?: any, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    put(url: string, data?: any, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    patch(url: string, data?: any, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    delete(url: string, data?: any, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    postForm(url: string, data?: any, hasBrackets?: boolean, hasIndex?: boolean, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    postFile(url: string, files: File | File[], name?: string, hasBrackets?: boolean, hasIndex?: boolean, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
     cancelRequest(message: string): XHttpClass;
     cancelWhiteListRequest(message: string): XHttpClass;
     getCancelToken(): any;
@@ -102,6 +111,6 @@ declare const CODE_MSG: {
     [status: number]: string;
 };
 declare const XHttp: XHttpClass;
-export { XHttp, XHttpMethod, XHttpUtils, Axios, CODE_MSG };
+export { XHttp, XHttpMethod, XHttpUtils, Axios, CODE_MSG, RequestConfig, XHttpOptions, ErrorHandlerFunction, HandlerFunction, AxiosRetryConfig, Response, Header, AxiosRequestConfig };
 export default XHttp;
 //# sourceMappingURL=index.d.ts.map

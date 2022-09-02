@@ -1,6 +1,6 @@
-js-xhttp - v1.4.10
+js-xhttp - v1.5.0
 
-# js-xhttp - v1.4.10
+# js-xhttp - v1.5.0
 
 ## Table of contents
 
@@ -16,6 +16,17 @@ js-xhttp - v1.4.10
 
 - [XHttpClass](classes/XHttpClass.md)
 - [XHttpUtils](classes/XHttpUtils.md)
+
+### Interfaces
+
+- [AxiosRequestConfig](interfaces/AxiosRequestConfig.md)
+- [AxiosRetryConfig](interfaces/AxiosRetryConfig.md)
+- [ErrorHandlerFunction](interfaces/ErrorHandlerFunction.md)
+- [HandlerFunction](interfaces/HandlerFunction.md)
+- [Header](interfaces/Header.md)
+- [RequestConfig](interfaces/RequestConfig.md)
+- [Response](interfaces/Response.md)
+- [XHttpOptions](interfaces/XHttpOptions.md)
 
 ### Variables
 

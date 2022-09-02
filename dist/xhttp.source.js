@@ -135,7 +135,7 @@
     var XHttpClass = (function () {
         function XHttpClass(options, axiosConfig) {
             if (axiosConfig === void 0) { axiosConfig = {}; }
-            var _a, _b, _c, _d, _e, _f, _g, _h;
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j;
             this.timeout = 30000;
             this._cancelTokens = [];
             this._whiteListCancelTokens = [];
@@ -143,13 +143,14 @@
             if (this._cancelDuplicatedRequest) {
                 this._pendingRequests = new Map();
             }
-            this._retryConfig = (_b = options === null || options === void 0 ? void 0 : options.retryConfig) !== null && _b !== void 0 ? _b : null;
-            this._requestHandler = (_c = options === null || options === void 0 ? void 0 : options.requestHandler) !== null && _c !== void 0 ? _c : undefined;
-            this._responseHandler = (_d = options === null || options === void 0 ? void 0 : options.responseHandler) !== null && _d !== void 0 ? _d : undefined;
-            this._errorHandler = (_e = options === null || options === void 0 ? void 0 : options.errorHandler) !== null && _e !== void 0 ? _e : undefined;
-            this._requestFinally = (_f = options === null || options === void 0 ? void 0 : options.requestFinally) !== null && _f !== void 0 ? _f : undefined;
-            this._setRequestHeaders = (_g = options === null || options === void 0 ? void 0 : options.setRequestHeaders) !== null && _g !== void 0 ? _g : undefined;
-            this._defaultAxiosConfig = __assign({ timeout: (_h = options === null || options === void 0 ? void 0 : options.timeout) !== null && _h !== void 0 ? _h : this.timeout, validateStatus: function (status) {
+            this._rejectErrorPromise = (_b = options === null || options === void 0 ? void 0 : options.rejectErrorPromise) !== null && _b !== void 0 ? _b : true;
+            this._retryConfig = (_c = options === null || options === void 0 ? void 0 : options.retryConfig) !== null && _c !== void 0 ? _c : null;
+            this._requestHandler = (_d = options === null || options === void 0 ? void 0 : options.requestHandler) !== null && _d !== void 0 ? _d : undefined;
+            this._responseHandler = (_e = options === null || options === void 0 ? void 0 : options.responseHandler) !== null && _e !== void 0 ? _e : undefined;
+            this._errorHandler = (_f = options === null || options === void 0 ? void 0 : options.errorHandler) !== null && _f !== void 0 ? _f : undefined;
+            this._requestFinally = (_g = options === null || options === void 0 ? void 0 : options.requestFinally) !== null && _g !== void 0 ? _g : undefined;
+            this._setRequestHeaders = (_h = options === null || options === void 0 ? void 0 : options.setRequestHeaders) !== null && _h !== void 0 ? _h : undefined;
+            this._defaultAxiosConfig = __assign({ timeout: (_j = options === null || options === void 0 ? void 0 : options.timeout) !== null && _j !== void 0 ? _j : this.timeout, validateStatus: function (status) {
                     return true;
                 } }, axiosConfig);
             this.instance = axios__default["default"].create(this._defaultAxiosConfig);
@@ -265,13 +266,15 @@
             }
         };
         XHttpClass.prototype.request = function (method, url, config, isWhiteList) {
+            var _a;
             if (config === void 0) { config = {}; }
             if (isWhiteList === void 0) { isWhiteList = false; }
             return __awaiter(this, void 0, void 0, function () {
                 var requestConfig, cancelTokenSource, cancelToken;
                 var _this = this;
-                return __generator(this, function (_a) {
+                return __generator(this, function (_b) {
                     requestConfig = __assign(__assign({}, config), { url: url, method: method });
+                    requestConfig.rejectErrorPromise = (_a = requestConfig.rejectErrorPromise) !== null && _a !== void 0 ? _a : this._rejectErrorPromise;
                     if (!this._cancelDuplicatedRequest || isWhiteList) {
                         cancelTokenSource = axios__default["default"].CancelToken.source();
                         cancelToken = cancelTokenSource.token;
@@ -291,11 +294,11 @@
                         })
                             .catch(function (error) {
                             var _a;
-                            return (_a = _this._errorHandler) === null || _a === void 0 ? void 0 : _a.call(_this, error);
+                            return (_a = _this._errorHandler) === null || _a === void 0 ? void 0 : _a.call(_this, error, requestConfig);
                         })
                             .finally(function () {
                             var _a;
-                            (_a = _this._requestFinally) === null || _a === void 0 ? void 0 : _a.call(_this);
+                            (_a = _this._requestFinally) === null || _a === void 0 ? void 0 : _a.call(_this, requestConfig);
                         })];
                 });
             });

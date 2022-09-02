@@ -1,4 +1,4 @@
-[js-xhttp - v1.4.10](../README.md) / XHttpUtils
+[js-xhttp - v1.5.0](../README.md) / XHttpUtils
 
 # Class: XHttpUtils
 

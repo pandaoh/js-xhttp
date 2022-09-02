@@ -49,6 +49,7 @@ const $http = XHttp.create(
   {
     timeout: 10000, // timeout default: 30000
     cancelDuplicatedRequest: true, // Whether to cancel the duplicate request default: true
+    rejectErrorPromise: false, // [default: true] Use with errorHandler to reject the requestError
     retryConfig: {
       // Retry the configuration
       retry: 3, // retry count
@@ -63,8 +64,10 @@ const $http = XHttp.create(
       if (response.data.code != 0) {
         message.error(response.data.msg);
       }
+      console.log(response.config);
     },
-    errorHandler: (error: any) => {
+    errorHandler: (error: any, requestConfig: any) => {
+       console.log(requestConfig);
       // Error handler before error
       if (!XHttp.isCancel(error) && !error.message?.includes("custom-error")) {
         notification.error({
@@ -75,13 +78,16 @@ const $http = XHttp.create(
       // Whether to pass the error to the outer layer. If not, you can avoid customizing the error handling for each request.
       // return Promise.reject(error); 
       console.log("errorHandler", error); // Error log
+      if (requestConfig.rejectErrorPromise) {
+        return Promise.reject(error);
+      }
     },
     setRequestHeaders: (config: any) => {
       // Set request headers here, you can also use $http.setAuthToken to set the authorization token.
       return config; // Returns the configuration object, and the request header can be modified. must return an Headers object, otherwise an error will be thrown.
     },
-    requestFinally: () => {
-      console.log("requestFinally Hooks"); // The callback when the request is completed, regardless of the result.
+    requestFinally: (requestConfig: any) => {
+      console.log("requestFinally Hooks", requestConfig); // The callback when the request is completed, regardless of the result.
     },
   },
   // axios configuration
@@ -120,14 +126,14 @@ XHttp
   });
 XHttp.get('/test', { start: 0, count: 20 }, {}, true); 
 // The whitelist cannot be cancelled unless cancelWhiteListRequest() is called
-XHttp.request(XHttpMethod.GET, '/tests', { start: 0, count: 20 }, {}, true);
+XHttp.request(XHttpMethod.GET, '/tests', { params: { start: 0, count: 20 }, rejectErrorPromise: true }, {}, true);
 
 $http.get('/tests', { start: 0, count: 20 }, {});
 $http
   .post(
   '/login',
   { username: 'test', password: '123456' },
-  { headers: { 'Content-Type': 'application/json' }}
+  { headers: { 'Content-Type': 'application/json' }, rejectErrorPromise: true }
   ).then((res) => {
     console.log('res', res);
   })
@@ -139,7 +145,7 @@ $http
   });
 $http.get('/test', { start: 0, count: 20 }, {}, true); 
 // The whitelist cannot be cancelled unless cancelWhiteListRequest() is called
-$http.request(XHttpMethod.GET, '/tests', { start: 0, count: 20 }, {}, true);
+$http.request(XHttpMethod.GET, '/tests', { params: { start: 0, count: 20 } }, {}, true);
 ```
 
 ### XHttp methods

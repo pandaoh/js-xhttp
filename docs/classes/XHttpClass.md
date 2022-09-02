@@ -1,4 +1,4 @@
-[js-xhttp - v1.4.10](../README.md) / XHttpClass
+[js-xhttp - v1.5.0](../README.md) / XHttpClass
 
 # Class: XHttpClass
 
@@ -17,6 +17,7 @@ XHttp Class
 - [\_defaultAxiosConfig](XHttpClass.md#_defaultaxiosconfig)
 - [\_errorHandler](XHttpClass.md#_errorhandler)
 - [\_pendingRequests](XHttpClass.md#_pendingrequests)
+- [\_rejectErrorPromise](XHttpClass.md#_rejecterrorpromise)
 - [\_requestFinally](XHttpClass.md#_requestfinally)
 - [\_requestHandler](XHttpClass.md#_requesthandler)
 - [\_responseHandler](XHttpClass.md#_responsehandler)
@@ -66,8 +67,8 @@ XHttp Class
 
 | Name | Type |
 | :------ | :------ |
-| `options?` | `XHttpOptions` |
-| `axiosConfig` | `AxiosRequestConfig`<`any`\> |
+| `options?` | [`XHttpOptions`](../interfaces/XHttpOptions.md) |
+| `axiosConfig` | [`AxiosRequestConfig`](../interfaces/AxiosRequestConfig.md)<`any`\> |
 
 ## Properties
 
@@ -85,19 +86,25 @@ ___
 
 ### \_defaultAxiosConfig
 
-• `Private` **\_defaultAxiosConfig**: `undefined` \| `AxiosRequestConfig`<`any`\>
+• `Private` **\_defaultAxiosConfig**: `undefined` \| [`AxiosRequestConfig`](../interfaces/AxiosRequestConfig.md)<`any`\>
 
 ___
 
 ### \_errorHandler
 
-• `Private` **\_errorHandler**: `undefined` \| `HandlerFunction`<`any`\>
+• `Private` **\_errorHandler**: `undefined` \| [`ErrorHandlerFunction`](../interfaces/ErrorHandlerFunction.md)<`any`\>
 
 ___
 
 ### \_pendingRequests
 
 • `Private` **\_pendingRequests**: `any`
+
+___
+
+### \_rejectErrorPromise
+
+• `Private` **\_rejectErrorPromise**: `boolean`
 
 ___
 
@@ -109,13 +116,13 @@ ___
 
 ### \_requestHandler
 
-• `Private` **\_requestHandler**: `undefined` \| `HandlerFunction`<`any`\>
+• `Private` **\_requestHandler**: `undefined` \| [`HandlerFunction`](../interfaces/HandlerFunction.md)<`any`\>
 
 ___
 
 ### \_responseHandler
 
-• `Private` **\_responseHandler**: `undefined` \| `HandlerFunction`<`any`\>
+• `Private` **\_responseHandler**: `undefined` \| [`HandlerFunction`](../interfaces/HandlerFunction.md)<`any`\>
 
 ___
 
@@ -127,7 +134,7 @@ ___
 
 ### \_setRequestHeaders
 
-• `Private` **\_setRequestHeaders**: `undefined` \| `HandlerFunction`<`object`\>
+• `Private` **\_setRequestHeaders**: `undefined` \| [`HandlerFunction`](../interfaces/HandlerFunction.md)<`object`\>
 
 ___
 
@@ -255,8 +262,8 @@ ___
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `options?` | `XHttpOptions` | XHttp 配置 |
-| `axiosConfig` | `AxiosRequestConfig`<`any`\> | Axios 配置 |
+| `options?` | [`XHttpOptions`](../interfaces/XHttpOptions.md) | XHttp 配置 |
+| `axiosConfig` | [`AxiosRequestConfig`](../interfaces/AxiosRequestConfig.md)<`any`\> | Axios 配置 |
 
 #### Returns
 
@@ -266,7 +273,7 @@ ___
 
 ### delete
 
-▸ **delete**(`url`, `data?`, `config?`, `isWhiteList?`): `Promise`<`Response`<`any`\>\>
+▸ **delete**(`url`, `data?`, `config?`, `isWhiteList?`): `Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 delete
 
@@ -276,18 +283,18 @@ delete
 | :------ | :------ | :------ | :------ |
 | `url` | `string` | `undefined` |  |
 | `data` | `any` | `{}` |  |
-| `config` | `AxiosRequestConfig`<`any`\> | `{}` |  |
+| `config` | [`RequestConfig`](../interfaces/RequestConfig.md) | `{}` |  |
 | `isWhiteList` | `boolean` | `false` | default[false] |
 
 #### Returns
 
-`Promise`<`Response`<`any`\>\>
+`Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 ___
 
 ### get
 
-▸ **get**(`url`, `params?`, `config?`, `isWhiteList?`): `Promise`<`Response`<`any`\>\>
+▸ **get**(`url`, `params?`, `config?`, `isWhiteList?`): `Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 get
 
@@ -297,12 +304,12 @@ get
 | :------ | :------ | :------ | :------ |
 | `url` | `string` | `undefined` |  |
 | `params` | `any` | `{}` |  |
-| `config` | `AxiosRequestConfig`<`any`\> | `{}` |  |
+| `config` | [`RequestConfig`](../interfaces/RequestConfig.md) | `{}` |  |
 | `isWhiteList` | `boolean` | `false` | default[false] |
 
 #### Returns
 
-`Promise`<`Response`<`any`\>\>
+`Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 ___
 
@@ -408,7 +415,7 @@ ___
 
 ### patch
 
-▸ **patch**(`url`, `data?`, `config?`, `isWhiteList?`): `Promise`<`Response`<`any`\>\>
+▸ **patch**(`url`, `data?`, `config?`, `isWhiteList?`): `Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 patch
 
@@ -418,18 +425,18 @@ patch
 | :------ | :------ | :------ | :------ |
 | `url` | `string` | `undefined` |  |
 | `data` | `any` | `{}` |  |
-| `config` | `AxiosRequestConfig`<`any`\> | `{}` |  |
+| `config` | [`RequestConfig`](../interfaces/RequestConfig.md) | `{}` |  |
 | `isWhiteList` | `boolean` | `false` | default[false] |
 
 #### Returns
 
-`Promise`<`Response`<`any`\>\>
+`Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 ___
 
 ### post
 
-▸ **post**(`url`, `data?`, `config?`, `isWhiteList?`): `Promise`<`Response`<`any`\>\>
+▸ **post**(`url`, `data?`, `config?`, `isWhiteList?`): `Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 post
 
@@ -439,18 +446,18 @@ post
 | :------ | :------ | :------ | :------ |
 | `url` | `string` | `undefined` |  |
 | `data` | `any` | `{}` |  |
-| `config` | `AxiosRequestConfig`<`any`\> | `{}` |  |
+| `config` | [`RequestConfig`](../interfaces/RequestConfig.md) | `{}` |  |
 | `isWhiteList` | `boolean` | `false` | default[false] |
 
 #### Returns
 
-`Promise`<`Response`<`any`\>\>
+`Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 ___
 
 ### postFile
 
-▸ **postFile**(`url`, `files`, `name?`, `hasBrackets?`, `hasIndex?`, `config?`, `isWhiteList?`): `Promise`<`Response`<`any`\>\>
+▸ **postFile**(`url`, `files`, `name?`, `hasBrackets?`, `hasIndex?`, `config?`, `isWhiteList?`): `Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 上传文件
 
@@ -463,18 +470,18 @@ ___
 | `name` | `string` | `'file'` | default['file'] |
 | `hasBrackets` | `boolean` | `false` | default[false] |
 | `hasIndex` | `boolean` | `false` | default[false] |
-| `config` | `AxiosRequestConfig`<`any`\> | `{}` | default[{}] |
+| `config` | [`RequestConfig`](../interfaces/RequestConfig.md) | `{}` | default[{}] |
 | `isWhiteList` | `boolean` | `false` | default[false] |
 
 #### Returns
 
-`Promise`<`Response`<`any`\>\>
+`Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 ___
 
 ### postForm
 
-▸ **postForm**(`url`, `data?`, `hasBrackets?`, `hasIndex?`, `config?`, `isWhiteList?`): `Promise`<`Response`<`any`\>\>
+▸ **postForm**(`url`, `data?`, `hasBrackets?`, `hasIndex?`, `config?`, `isWhiteList?`): `Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 上传表单
 
@@ -486,18 +493,18 @@ ___
 | `data` | `any` | `{}` |  |
 | `hasBrackets` | `boolean` | `false` | default[false] |
 | `hasIndex` | `boolean` | `false` | default[false] |
-| `config` | `AxiosRequestConfig`<`any`\> | `{}` | default[{}] |
+| `config` | [`RequestConfig`](../interfaces/RequestConfig.md) | `{}` | default[{}] |
 | `isWhiteList` | `boolean` | `false` | default[false] |
 
 #### Returns
 
-`Promise`<`Response`<`any`\>\>
+`Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 ___
 
 ### put
 
-▸ **put**(`url`, `data?`, `config?`, `isWhiteList?`): `Promise`<`Response`<`any`\>\>
+▸ **put**(`url`, `data?`, `config?`, `isWhiteList?`): `Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 put
 
@@ -507,18 +514,18 @@ put
 | :------ | :------ | :------ | :------ |
 | `url` | `string` | `undefined` |  |
 | `data` | `any` | `{}` |  |
-| `config` | `AxiosRequestConfig`<`any`\> | `{}` |  |
+| `config` | [`RequestConfig`](../interfaces/RequestConfig.md) | `{}` |  |
 | `isWhiteList` | `boolean` | `false` | default[false] |
 
 #### Returns
 
-`Promise`<`Response`<`any`\>\>
+`Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 ___
 
 ### request
 
-▸ **request**(`method`, `url`, `config?`, `isWhiteList?`): `Promise`<`Response`<`any`\>\>
+▸ **request**(`method`, `url`, `config?`, `isWhiteList?`): `Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 request
 
@@ -528,12 +535,12 @@ request
 | :------ | :------ | :------ | :------ |
 | `method` | [`XHttpMethod`](../enums/XHttpMethod.md) \| `Method` | `undefined` |  |
 | `url` | `string` | `undefined` |  |
-| `config` | `AxiosRequestConfig`<`any`\> | `{}` |  |
+| `config` | [`RequestConfig`](../interfaces/RequestConfig.md) | `{}` |  |
 | `isWhiteList` | `boolean` | `false` | default[false] |
 
 #### Returns
 
-`Promise`<`Response`<`any`\>\>
+`Promise`<[`Response`](../interfaces/Response.md)<`any`\>\>
 
 ___
 

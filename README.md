@@ -49,6 +49,7 @@ const $http = XHttp.create(
   {
     timeout: 10000, // 超时时间 default: 30000
     cancelDuplicatedRequest: true, // 是否取消重复请求 default: true
+    rejectErrorPromise: false, // [default: true] 配合 errorHandler 使用，决定是否抛出异常到页面上。
     retryConfig: {
       // 重试配置
       retry: 3, // 次数
@@ -63,8 +64,10 @@ const $http = XHttp.create(
       if (response.data.code != 0) {
         message.error(response.data.msg);
       }
+      console.log(response.config);
     },
-    errorHandler: (error: any) => {
+    errorHandler: (error: any, requestConfig: any) => {
+      console.log(requestConfig);
       // 统一错误处理
       if (!XHttp.isCancel(error) && !error.message?.includes("custom-error")) {
         notification.error({
@@ -74,13 +77,16 @@ const $http = XHttp.create(
       }
       // return Promise.reject(error); // 是否传递错误到外层 不传递则可以免去每次请求去自定义错误处理
       console.log("errorHandler", error); // 错误处理 可自行打印日志log
+      if (requestConfig.rejectErrorPromise) {
+        return Promise.reject(error);
+      }
     },
     setRequestHeaders: (config: any) => {
       // 设置请求头 可以添加 token 等，也可以通过 $http.setAuthToken 来处理
       return config; // 返回配置对象，可修改请求头。必须返回一个请求头对象，否则会抛出错误。
     },
-    requestFinally: () => {
-      console.log("requestFinally Hooks"); // 请求完成时的回调，无论结果如何。
+    requestFinally: (requestConfig: any) => {
+      console.log("requestFinally Hooks", requestConfig); // 请求完成时的回调，无论结果如何。
     },
   },
   // axios 配置
@@ -118,14 +124,14 @@ XHttp
   });
 XHttp.get('/test', { start: 0, count: 20 }, {}, true); 
 // 白名单不可取消 除非调用 cancelWhiteListRequest()
-XHttp.request(XHttpMethod.GET, '/tests', { start: 0, count: 20 }, {}, true);
+XHttp.request(XHttpMethod.GET, '/tests', { params: { start: 0, count: 20 }, rejectErrorPromise: true }, {}, true);
 
 $http.get('/tests', { start: 0, count: 20 }, {});
 $http
   .post(
   '/login',
   { username: 'test', password: '123456' },
-  { headers: { 'Content-Type': 'application/json' }}
+  { headers: { 'Content-Type': 'application/json' }, rejectErrorPromise: true }
   ).then((res) => {
     console.log('res', res);
   })
@@ -137,7 +143,7 @@ $http
   });
 $http.get('/test', { start: 0, count: 20 }, {}, true); 
 // 白名单不可取消 除非调用 cancelWhiteListRequest()
-$http.request(XHttpMethod.GET, '/tests', { start: 0, count: 20 }, {}, true);
+$http.request(XHttpMethod.GET, '/tests', { params: { start: 0, count: 20 } }, {}, true);
 ```
 
 ### 相关方法
