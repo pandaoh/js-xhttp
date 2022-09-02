@@ -1,4 +1,4 @@
-[js-xhttp - v1.5.0](../README.md) / RequestConfig
+[js-xhttp - v1.5.1](../README.md) / RequestConfig
 
 # Interface: RequestConfig
 

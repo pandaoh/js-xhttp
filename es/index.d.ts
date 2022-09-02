@@ -26,7 +26,7 @@ interface HandlerFunction<T = any> {
     (data: T): T;
 }
 interface ErrorHandlerFunction<T = any> {
-    (data: T, requestConfig: any): T;
+    (data: T, requestConfig: RequestConfig): T;
 }
 interface XHttpOptions {
     retryConfig?: AxiosRetryConfig;
@@ -36,7 +36,7 @@ interface XHttpOptions {
     requestHandler?: HandlerFunction;
     responseHandler?: HandlerFunction;
     errorHandler?: ErrorHandlerFunction;
-    requestFinally?: () => void;
+    requestFinally?: (requestConfig: RequestConfig) => void;
     setRequestHeaders?: HandlerFunction<object>;
 }
 declare enum XHttpMethod {

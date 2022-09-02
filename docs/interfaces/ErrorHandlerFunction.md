@@ -1,4 +1,4 @@
-[js-xhttp - v1.5.0](../README.md) / ErrorHandlerFunction
+[js-xhttp - v1.5.1](../README.md) / ErrorHandlerFunction
 
 # Interface: ErrorHandlerFunction<T\>
 
@@ -19,7 +19,7 @@
 | Name | Type |
 | :------ | :------ |
 | `data` | `T` |
-| `requestConfig` | `any` |
+| `requestConfig` | [`RequestConfig`](RequestConfig.md) |
 
 #### Returns
 

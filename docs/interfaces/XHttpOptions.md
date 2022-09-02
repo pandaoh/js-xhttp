@@ -1,4 +1,4 @@
-[js-xhttp - v1.5.0](../README.md) / XHttpOptions
+[js-xhttp - v1.5.1](../README.md) / XHttpOptions
 
 # Interface: XHttpOptions
 
@@ -71,7 +71,13 @@ ___
 
 ### requestFinally
 
-▸ `Optional` **requestFinally**(): `void`
+▸ `Optional` **requestFinally**(`requestConfig`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `requestConfig` | [`RequestConfig`](RequestConfig.md) |
 
 #### Returns
 

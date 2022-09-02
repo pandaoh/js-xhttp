@@ -1,4 +1,4 @@
-[js-xhttp - v1.5.0](../README.md) / Response
+[js-xhttp - v1.5.1](../README.md) / Response
 
 # Interface: Response<T\>
 
