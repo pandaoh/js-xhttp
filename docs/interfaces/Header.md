@@ -1,4 +1,4 @@
-[js-xhttp - v1.5.1](../README.md) / Header
+[js-xhttp - v1.6.0](../README.md) / Header
 
 # Interface: Header
 

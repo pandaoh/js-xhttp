@@ -218,7 +218,7 @@ var XHttpClass = (function () {
         this.instance.interceptors.response.use(function (response) {
             var _a, _b;
             if (_this._cancelDuplicatedRequest && !((_a = response.config) === null || _a === void 0 ? void 0 : _a.cancelToken)) {
-                _this._removePendingRequest(response);
+                _this._removePendingRequest(response.config);
             }
             (_b = _this._responseHandler) === null || _b === void 0 ? void 0 : _b.call(_this, response);
             return {
@@ -250,7 +250,12 @@ var XHttpClass = (function () {
         });
     };
     XHttpClass.prototype._removePendingRequest = function (config) {
-        var url = [config.method, config.url, JSON.stringify(config.params), JSON.stringify(config.data)].join('&');
+        var url = [
+            config.method,
+            config.url,
+            JSON.stringify(XHttpUtils.typeof(config.params) == 'string' ? JSON.parse(config.params) : config.params),
+            JSON.stringify(XHttpUtils.typeof(config.data) == 'string' ? JSON.parse(config.data) : config.data)
+        ].join('&');
         if (this._pendingRequests.has(url)) {
             var cancel = this._pendingRequests.get(url);
             cancel(url);
