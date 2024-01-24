@@ -1,6 +1,6 @@
 {
   "name": "js-xhttp",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "An HTTP tool is based on Axios that can make ajax more convenient and universal, easier to manage, and more efficient and unified.",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -14,12 +14,12 @@
     "tsc": "tsc",
     "build": "rollup -c",
     "test": "test",
-    "mock666": "npm install && node ./mocker/index.js",
+    "mock666": "npm install --force && node ./mocker/index.js",
     "clear": "rimraf ./node_modules && npm run remove",
     "remove": "rimraf ./dist && rimraf ./es && rimraf ./lib",
     "doc": "typedoc --options ./typedoc.json",
-    "pub": "npm install && npm run build && npm run doc && node ./auto-pub.js",
-    "pub:local": "npm install && npm run build && npm run doc && node ./auto-pub.js true"
+    "pub": "npm install --force && npm run build && npm run doc && node ./auto-pub.js",
+    "pub:local": "npm install --force && npm run build && npm run doc && node ./auto-pub.js true"
   },
   "files": [
     "/lib",
@@ -75,8 +75,8 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.31.2",
     "ts-loader": "^9.2.6",
-    "typedoc": "^0.22.11",
-    "typedoc-plugin-markdown": "^3.11.13",
+    "typedoc": "^0.24.7",
+    "typedoc-plugin-markdown": "^3.15.3",
     "webpack": "^5.67.0",
     "webpack-cli": "^4.9.2"
   }
