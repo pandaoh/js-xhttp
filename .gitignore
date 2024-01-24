@@ -2,3 +2,4 @@
 **/node_modules/
 **/**.min.js
 **/public/**
+**/package-lock.json
