@@ -28,6 +28,9 @@ interface HandlerFunction<T = any> {
 interface ErrorHandlerFunction<T = any> {
     (data: T, requestConfig: RequestConfig): T;
 }
+interface ResultFunction<T = any> {
+    (res: Response): T;
+}
 interface XHttpOptions {
     retryConfig?: AxiosRetryConfig;
     timeout?: number;
@@ -38,6 +41,7 @@ interface XHttpOptions {
     errorHandler?: ErrorHandlerFunction;
     requestFinally?: (requestConfig: RequestConfig) => void;
     setRequestHeaders?: HandlerFunction<object>;
+    formatResultAdaptor?: ResultFunction | undefined;
 }
 declare enum XHttpMethod {
     GET = "GET",
@@ -55,6 +59,8 @@ declare enum XHttpMethod {
 }
 interface RequestConfig extends AxiosRequestConfig {
     rejectErrorPromise?: boolean;
+    isWhiteList?: boolean;
+    formatResultAdaptor?: ResultFunction | undefined;
     [key: string]: any;
 }
 declare class XHttpUtils {
@@ -73,6 +79,7 @@ export declare class XHttpClass {
     private _errorHandler;
     private _requestFinally;
     private _setRequestHeaders;
+    private _formatResultAdaptor;
     private _pendingRequests;
     private _cancelDuplicatedRequest;
     private _cancelTokens;
@@ -83,8 +90,9 @@ export declare class XHttpClass {
     private _initInterceptors;
     private _addPendingRequest;
     private _removePendingRequest;
-    request(method: XHttpMethod | AxiosMethod, url: string, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
-    axiosRequest(url: string, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
+    request<R = any>(method: XHttpMethod | AxiosMethod | undefined, url: string | undefined, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<R>>;
+    axiosRequest<R = any>(url: string, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<R>>;
+    allInRequest<R = any>(config?: RequestConfig): Promise<Response<R>>;
     get(url: string, params?: any, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
     post(url: string, data?: any, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
     put(url: string, data?: any, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;

@@ -59,6 +59,7 @@ const $http = XHttp.create(
       console.log("requestHandler", config); // 请求前的拦截处理 可自行打印日志log
       console.log(config?.cancelRequest); // 请求取消函数
     },
+    // 可以使用 formatResultAdaptor 处理返回值，或者单独请求 config 中 formatResultAdaptor 处理返回值。
     responseHandler: (response: any) => {
       // 可在此处统一处理返回数据提示
       if (response.data.code != 0) {

@@ -55,6 +55,7 @@ const $http = XHttp.create(
       retry: 3, // retry count
       delay: 1000, // Base delay time for each retry
     },
+    // Use formatResultAdaptor handle response data or use request config.formatResultAdaptor handle response data
     requestHandler: (config: any) => {
       console.log("requestHandler", config); // Intercept processing before request
       console.log(config?.cancelRequest); // Cancel request

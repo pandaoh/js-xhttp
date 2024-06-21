@@ -140,7 +140,7 @@
   var XHttpClass = (function () {
       function XHttpClass(options, axiosConfig) {
           if (axiosConfig === void 0) { axiosConfig = {}; }
-          var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+          var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
           this.timeout = 30000;
           this._cancelTokens = [];
           this._whiteListCancelTokens = [];
@@ -155,7 +155,8 @@
           this._errorHandler = (_f = options === null || options === void 0 ? void 0 : options.errorHandler) !== null && _f !== void 0 ? _f : undefined;
           this._requestFinally = (_g = options === null || options === void 0 ? void 0 : options.requestFinally) !== null && _g !== void 0 ? _g : undefined;
           this._setRequestHeaders = (_h = options === null || options === void 0 ? void 0 : options.setRequestHeaders) !== null && _h !== void 0 ? _h : undefined;
-          this._defaultAxiosConfig = __assign({ timeout: (_j = options === null || options === void 0 ? void 0 : options.timeout) !== null && _j !== void 0 ? _j : this.timeout, validateStatus: function (status) {
+          this._formatResultAdaptor = (_j = options === null || options === void 0 ? void 0 : options.formatResultAdaptor) !== null && _j !== void 0 ? _j : undefined;
+          this._defaultAxiosConfig = __assign({ timeout: (_k = options === null || options === void 0 ? void 0 : options.timeout) !== null && _k !== void 0 ? _k : this.timeout, validateStatus: function (status) {
                   return true;
               } }, axiosConfig);
           this.instance = axios__default["default"].create(this._defaultAxiosConfig);
@@ -276,15 +277,17 @@
           }
       };
       XHttpClass.prototype.request = function (method, url, config, isWhiteList) {
-          var _a;
+          var _a, _b, _c;
           if (config === void 0) { config = {}; }
           if (isWhiteList === void 0) { isWhiteList = false; }
           return __awaiter(this, void 0, void 0, function () {
               var requestConfig, cancelTokenSource, cancelToken;
               var _this = this;
-              return __generator(this, function (_b) {
-                  requestConfig = __assign(__assign({}, config), { url: url, method: method });
+              return __generator(this, function (_d) {
+                  requestConfig = __assign({ url: url, method: method }, config);
                   requestConfig.rejectErrorPromise = (_a = requestConfig.rejectErrorPromise) !== null && _a !== void 0 ? _a : this._rejectErrorPromise;
+                  requestConfig.formatResultAdaptor = (_b = requestConfig.formatResultAdaptor) !== null && _b !== void 0 ? _b : this._formatResultAdaptor;
+                  requestConfig.isWhiteList = (_c = isWhiteList !== null && isWhiteList !== void 0 ? isWhiteList : config.isWhiteList) !== null && _c !== void 0 ? _c : false;
                   if (!this._cancelDuplicatedRequest || isWhiteList) {
                       cancelTokenSource = axios__default["default"].CancelToken.source();
                       cancelToken = cancelTokenSource.token;
@@ -300,6 +303,10 @@
                   return [2, this.instance
                           .request(requestConfig)
                           .then(function (res) {
+                          var _a;
+                          if (requestConfig.formatResultAdaptor) {
+                              return (_a = requestConfig.formatResultAdaptor) === null || _a === void 0 ? void 0 : _a.call(_this, res.data);
+                          }
                           return res.data;
                       })
                           .catch(function (error) {
@@ -314,40 +321,19 @@
           });
       };
       XHttpClass.prototype.axiosRequest = function (url, config, isWhiteList) {
-          var _a;
           if (config === void 0) { config = {}; }
           if (isWhiteList === void 0) { isWhiteList = false; }
           return __awaiter(this, void 0, void 0, function () {
-              var requestConfig, cancelTokenSource, cancelToken;
-              var _this = this;
-              return __generator(this, function (_b) {
-                  requestConfig = __assign(__assign({}, config), { url: url });
-                  requestConfig.rejectErrorPromise = (_a = requestConfig.rejectErrorPromise) !== null && _a !== void 0 ? _a : this._rejectErrorPromise;
-                  if (!this._cancelDuplicatedRequest || isWhiteList) {
-                      cancelTokenSource = axios__default["default"].CancelToken.source();
-                      cancelToken = cancelTokenSource.token;
-                      if (isWhiteList) {
-                          this._whiteListCancelTokens.push(cancelTokenSource);
-                      }
-                      else {
-                          this._cancelTokens.push(cancelTokenSource);
-                      }
-                      requestConfig.cancelToken = cancelToken;
-                      requestConfig.cancelRequest = cancelTokenSource.cancel;
-                  }
-                  return [2, this.instance
-                          .request(requestConfig)
-                          .then(function (res) {
-                          return res.data;
-                      })
-                          .catch(function (error) {
-                          var _a;
-                          return (_a = _this._errorHandler) === null || _a === void 0 ? void 0 : _a.call(_this, error, requestConfig);
-                      })
-                          .finally(function () {
-                          var _a;
-                          (_a = _this._requestFinally) === null || _a === void 0 ? void 0 : _a.call(_this, requestConfig);
-                      })];
+              return __generator(this, function (_a) {
+                  return [2, this.request(config.method, url, config, isWhiteList)];
+              });
+          });
+      };
+      XHttpClass.prototype.allInRequest = function (config) {
+          if (config === void 0) { config = {}; }
+          return __awaiter(this, void 0, void 0, function () {
+              return __generator(this, function (_a) {
+                  return [2, this.request(config.method, config.url, config, config.isWhiteList)];
               });
           });
       };
