@@ -313,6 +313,44 @@
               });
           });
       };
+      XHttpClass.prototype.axiosRequest = function (url, config, isWhiteList) {
+          var _a;
+          if (config === void 0) { config = {}; }
+          if (isWhiteList === void 0) { isWhiteList = false; }
+          return __awaiter(this, void 0, void 0, function () {
+              var requestConfig, cancelTokenSource, cancelToken;
+              var _this = this;
+              return __generator(this, function (_b) {
+                  requestConfig = __assign(__assign({}, config), { url: url });
+                  requestConfig.rejectErrorPromise = (_a = requestConfig.rejectErrorPromise) !== null && _a !== void 0 ? _a : this._rejectErrorPromise;
+                  if (!this._cancelDuplicatedRequest || isWhiteList) {
+                      cancelTokenSource = axios__default["default"].CancelToken.source();
+                      cancelToken = cancelTokenSource.token;
+                      if (isWhiteList) {
+                          this._whiteListCancelTokens.push(cancelTokenSource);
+                      }
+                      else {
+                          this._cancelTokens.push(cancelTokenSource);
+                      }
+                      requestConfig.cancelToken = cancelToken;
+                      requestConfig.cancelRequest = cancelTokenSource.cancel;
+                  }
+                  return [2, this.instance
+                          .request(requestConfig)
+                          .then(function (res) {
+                          return res.data;
+                      })
+                          .catch(function (error) {
+                          var _a;
+                          return (_a = _this._errorHandler) === null || _a === void 0 ? void 0 : _a.call(_this, error, requestConfig);
+                      })
+                          .finally(function () {
+                          var _a;
+                          (_a = _this._requestFinally) === null || _a === void 0 ? void 0 : _a.call(_this, requestConfig);
+                      })];
+              });
+          });
+      };
       XHttpClass.prototype.get = function (url, params, config, isWhiteList) {
           if (params === void 0) { params = {}; }
           if (config === void 0) { config = {}; }
