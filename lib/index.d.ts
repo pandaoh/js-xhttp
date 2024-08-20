@@ -91,7 +91,7 @@ export declare class XHttpClass {
     private _addPendingRequest;
     private _removePendingRequest;
     request<R = any>(method: XHttpMethod | AxiosMethod | undefined, url: string | undefined, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<R>>;
-    axiosRequest<R = any>(url: string, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<R>>;
+    axiosRequest<R = any>(urlOrConfig: string | RequestConfig, config?: RequestConfig): Promise<Response<R>>;
     allInRequest<R = any>(config?: RequestConfig): Promise<Response<R>>;
     get(url: string, params?: any, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;
     post(url: string, data?: any, config?: RequestConfig, isWhiteList?: boolean): Promise<Response<any>>;

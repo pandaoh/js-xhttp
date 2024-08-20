@@ -312,12 +312,21 @@ var XHttpClass = (function () {
             });
         });
     };
-    XHttpClass.prototype.axiosRequest = function (url, config, isWhiteList) {
-        if (config === void 0) { config = {}; }
-        if (isWhiteList === void 0) { isWhiteList = false; }
+    XHttpClass.prototype.axiosRequest = function (urlOrConfig, config) {
         return __awaiter(this, void 0, void 0, function () {
+            var url, finalConfig, isWhiteList;
             return __generator(this, function (_a) {
-                return [2, this.request(config.method, url, config, isWhiteList)];
+                isWhiteList = false;
+                if (typeof urlOrConfig === 'string') {
+                    url = urlOrConfig;
+                    finalConfig = config || {};
+                }
+                else {
+                    url = urlOrConfig.url || '';
+                    finalConfig = urlOrConfig;
+                    isWhiteList = urlOrConfig.isWhiteList || false;
+                }
+                return [2, this.request((finalConfig === null || finalConfig === void 0 ? void 0 : finalConfig.method) || 'GET', url, finalConfig, isWhiteList)];
             });
         });
     };
@@ -325,7 +334,7 @@ var XHttpClass = (function () {
         if (config === void 0) { config = {}; }
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2, this.request(config.method, config.url, config, config.isWhiteList)];
+                return [2, this.request((config === null || config === void 0 ? void 0 : config.method) || 'GET', (config === null || config === void 0 ? void 0 : config.url) || '', config || {}, (config === null || config === void 0 ? void 0 : config.isWhiteList) || false)];
             });
         });
     };
