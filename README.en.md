@@ -2,6 +2,8 @@
 
 # XHttp
 
+## @deprecated since 2026.09.01 jump to [@biugle/http](https://www.npmjs.com/package/@biugle/http)
+
 ## 介绍
 
 > An HTTP tool is based on Axios that can make ajax more convenient and universal, easier to manage, and more efficient and unified.
