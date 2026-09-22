@@ -2,6 +2,8 @@
 
 # XHttp
 
+## @deprecated since 2026.09.01 jump to [@biugle/http](https://www.npmjs.com/package/@biugle/http)
+
 ## 介绍
 
 > XHttp 是一个基于 `axios` 二次封装的 HTTP 请求工具，可以让你在项目中使用 `http` 请求时更加简单，更加通用灵活，更加高效统一，且易于全局管理。
